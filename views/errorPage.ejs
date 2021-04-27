@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error | Demo EJS Education</title>
+    <link href="/styles/bootstrap.min.css" rel="stylesheet"> 
+    <link href="/styles/default.css" rel="stylesheet">
+    <link rel="stylesheet" href="/styles/all.min.css">
+</head>
+
+<body class="d-flex flex-column vh-100">
+    <%- include('./partials/default-navbar') %>
+    <main class="container mt-5">
+        <%- include('./partials/flash.ejs') %>
+        <!--DEFAULT ERROR PAGE THAT IS RESPONDS WITH ERROR MESSAGE, STATUSCODE, AND ERROR STACK.-->
+        <div class="row">
+            <div class="col-8 offset-2">
+                <div class="alert alert-danger" role="alert">
+                    <h4 class="alert-heading"><%=err.message%></h4>
+                    <!-- ALTERNATIVELY WE CAN DELETE THE ERROR STACK FROM THE PRODUCTION VERSION -->
+                    <% if(process.env.NODE_ENV !== "production") { %> 
+                        <p><%= err.stack %></p>
+                    <% } %> 
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- Inspired by https://mdbootstrap.com/docs/standard/navigation/footer/ -->
+    <footer class="footer mt-auto bg-dark text-center text-lg-start">
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
+            <span class="text-light">&copy 2021 LibertyLaunchGroup</span>
+        </div>
+    </footer>
+    <script src="/scripts/popper.min.js"></script>
+    <script src="/scripts/bootstrap.min.js"></script>
+    <script src="/scripts/validateForms.js"></script>
+</body>
+
+</html>

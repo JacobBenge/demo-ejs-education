@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Portal | Demo EJS Education</title>
+
+    <link href="/styles/bootstrap.min.css" rel="stylesheet">
+    <link href="/styles/default.css" rel="stylesheet">
+    <link rel="stylesheet" href="/styles/all.min.css">
+</head>
+
+<body class="d-flex flex-column vh-100">
+    <%- include('../partials/student-navbar') %>
+    <main class="container mt-5">
+        <%- include('../partials/flash.ejs') %>
+        <div class="row">
+            <div class="card shadow mb-5">
+                <div class="card-body container">
+                    <div class="row">
+                        <div class="col-2 mt-2">
+                            <a href="/" class="btn btn-dark font-weight-bold mb-1"><i class="fas fa-home"></i></a>
+                        </div>
+                        <h1 class="text-center mt-4 col-8">Student Portal</h1>
+                        <div class="col-2 mt-4">
+                        </div>
+                        <div class="row">
+                            <h4 class="text-end">Coin Balance: <span class="badge rounded-pill bg-success ml-auto"><i class="fas fa-coins"></i>
+                                <%=student.coinsBalance%>
+                            </span></h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4 mb-4 p-4">
+                            <div class="card card2">
+                                <!-- https://www.iconfinder.com/ -->
+                                <!-- http://www.gnu.org/licenses/gpl-3.0.html -->
+                                <a href="/sportal/profile"><img src="/img/iconfinder_humans_1216581.png" alt="Profile"
+                                        class="card-img-top pt-5 px-5"></a>
+                                <div class="card-body">
+                                    <h4 class="card-title text-center">Profile</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 mb-4 p-4">
+                            <div class="card card2">
+                                <!-- https://www.iconfinder.com/ -->
+                                <!-- http://www.gnu.org/licenses/gpl-3.0.html -->
+                                <a href="/sportal/homework"><img src="/img/iconfinder_pencil_1055013.png" alt="Pencil"
+                                        class="card-img-top pt-5 px-5"></a>
+                                <div class="card-body">
+                                    <h4 class="card-title text-center">Homework</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 mb-4 p-4">
+                            <div class="card card2">
+                                <!-- https://www.iconfinder.com/ -->
+                                <!-- http://www.gnu.org/licenses/gpl-3.0.html -->
+                                <a href="/sportal/<%=student._id%>"><img src="/img/iconfinder_rocket_1054990.png"
+                                        alt="Rocket" class="card-img-top pt-5 px-5"></a>
+                                <div class="card-body">
+                                    <h4 class="card-title text-center">Progress Report</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-2"></div>
+                    <div class="col-5 ">
+                        <!-- Show or hide external link buttons depending if they are present -->
+                        <% if(student.url1 || student.url2 || student.url3 || student.url4) { %>
+                        <h3>Personal Links</h3>
+                            <% } %>
+                                <% if(student.url1) { %>
+                                    <a href="<%=student.url1%>" target="_blank"
+                                        class="btn btn-success btn-lg mb-1 text-center">
+                                        <i class="fas fa-external-link-alt"></i>
+                                        <%=student.url1Label%>
+                                    </a>
+                                    <% } %>
+                                        <% if(student.url2) { %>
+                                            <a href="<%=student.url2%>" target="_blank" class="btn btn-warning btn-lg mb-1">
+                                                <i class="fas fa-external-link-alt"></i>
+                                                <%=student.url2Label%>
+                                            </a>
+                                            <% } %>
+                                                <% if(student.url3) { %>
+                                                    <a href="<%=student.url3%>" target="_blank"
+                                                        class="btn btn-info btn-lg mb-1">
+                                                        <i class="fas fa-external-link-alt"></i>
+                                                        <%=student.url3Label%>
+                                                    </a>
+                                                    <% } %>
+                                                        <% if(student.url4) { %>
+                                                            <a href="<%=student.url4%>" target="_blank"
+                                                                class="btn btn-danger mb-1 btn-lg">
+                                                                <i class="fas fa-external-link-alt"></i>
+                                                                <%=student.url4Label%>
+                                                            </a>
+                                                            <% } %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- Inspired by https://mdbootstrap.com/docs/standard/navigation/footer/ -->
+    <footer class="footer mt-auto bg-dark text-center text-lg-start">
+    <div class="container p-2">
+        <div class="row text-light">
+                <% if(settings !==null) { %>
+                    <div class=" mb-4 mb-lg-0 col-lg-2">
+                        <h5>QUICK LINKS</h5>
+                        <ul class="list-unstyled mb-0">
+                            <li>
+                                <a href="<%=settings.QL1URL%>" target="_blank" class="text-decoration-none footer-link"><%=settings.QL1Label%></a>
+                            </li>
+                            <li>
+                                <a href="<%=settings.QL2URL%>" target="_blank" class="text-decoration-none footer-link"><%=settings.QL2Label%></a>
+                            </li>
+                            <li>
+                                <a href="<%=settings.QL3URL%>" target="_blank" class="text-decoration-none footer-link"><%=settings.QL3Label%></a>
+                            </li>
+                            <li>
+                                <a href="<%=settings.QL4URL%>" target="_blank" class="text-decoration-none footer-link"><%=settings.QL4Label%></a>
+                            </li>
+                            <li>
+                                <a href="/" target="_blank" class="text-decoration-none footer-link">Home</a>
+                            </li>
+                            <li>
+                                <a href="/aboutus" target="_blank" class="text-decoration-none footer-link">About Us</a>
+                            </li>
+                            <li>
+                                <a href="/disclaimer" target="_blank"
+                                    class="text-decoration-none footer-link">Disclaimer</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class=" mb-4 mb-lg-0 col-lg-5">
+                        <h5>CONTACT</h5>
+                        <ul class="list-unstyled mb-0">
+                            <% if(settings.email) { %> 
+                            <li>
+                                <a href="mailto:<%=settings.email%>"
+                                    class="text-decoration-none footer-link"><i class="fas fa-envelope"></i>
+                                    <%=settings.email%></a>
+                            </li>
+                            <% } %> 
+                            <% if(settings.phone && settings.phoneLabel) { %> 
+                            <li>
+                                <a href="tel:<%=settings.phone%>" class="text-decoration-none footer-link"><i
+                                        class="fas fa-phone-alt"></i> <%=settings.phoneLabel%></a>
+                            </li>
+                            <% } %> 
+                            <% if(settings.hours) { %> 
+                            <li>
+                                <a class="text-decoration-none footer-link"><i class="fas fa-clock"></i> <%=settings.hours%></a>
+                            </li>
+                            <% } %> 
+                            <% if(settings.address) { %> 
+                            <li>
+                                <a href="https://maps.google.com/?q=<%=settings.address%>"
+                                    target="_blank" class="text-decoration-none footer-link"><i
+                                        class="fas fa-map-marker-alt"></i> <%=settings.address%></a>
+                            </li>
+                            <% } %> 
+                            <% if(settings.socialURL && settings.socialIcon && settings.socialLabel) { %> 
+                            <li>
+                                <a href="<%=settings.socialURL%>" target="_blank"
+                                    class="text-decoration-none footer-link"><i class="<%=settings.socialIcon%>"></i>
+                                    <%=settings.socialLabel%></a>
+                            </li>
+                            <% } %> 
+                            <% if(settings.payURL && settings.payLabel) { %> 
+                            <li>
+                                <a href="<%=settings.payURL%>" target="_blank" class="text-decoration-none footer-link"><i
+                                        class="fas fa-dollar-sign"></i> <%=settings.payLabel%></a>
+                            </li>
+                            <% } %> 
+                        </ul>
+                    </div>
+                    <% } else { %>
+                        <p>Please configure the Site Settings in the Teacher Portal.</p>
+                        <% } %>
+        </div>
+    </div>
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
+        <span class="text-light">&copy 2021 LibertyLaunchGroup</span>
+    </div>
+    </footer>
+    <script src="/scripts/popper.min.js"></script>
+    <script src="/scripts/bootstrap.min.js"></script>
+    <script src="/scripts/validateForms.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register | Demo EJS Education</title>
+    <link href="/styles/bootstrap.min.css" rel="stylesheet"> 
+    <link href="/styles/default.css" rel="stylesheet">
+    <link rel="stylesheet" href="/styles/all.min.css">
+</head>
+
+<body class="d-flex flex-column vh-100">
+    <%- include('../partials/default-navbar') %>
+    <main class="container mt-5">
+        <%- include('../partials/flash.ejs') %>
+        <div class="container d-flex justify-content-center align-items-center mt-3">
+            <div class="row">
+                <div class="card shadow mb-5">
+                    <img src="/img/LibertyLogo400px.png" class="card-img-top logo" alt="Logo">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">Register</h5>
+                        <form action="/register" method="POST" class="validated-form" novalidate>
+                            <% if(settings !==null) { %>
+                                <% if (settings.registerFormURL && settings.registerFormLabel) { %> 
+                                    <p class="text-muted text-center mt-3">Complete the enrollment form to obtain a registration
+                                        code.</p>
+                                    <div class="mb-3 text-center">
+                                        <a href="<%=settings.registerFormURL%> "
+                                            target="_blank" class="btn btn-sm btn-info "><%=settings.registerFormLabel%> </a>
+                                    </div>
+                                <% } %> 
+                            <% } %> 
+                            <div class="mb-3">
+                                <label class="form-label" for="registrationCode">Registration Code</label>
+                                <input class="form-control" type="text" id="registrationCode" name="userRegistrationCode"
+                                    placeholder="adminIsAllowedToRegister" autofocus required>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="email">Email</label>
+                                <input class="form-control" type="email" id="email" name="email"
+                                    placeholder="you@domain.com" required>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="username">Username</label>
+                                <input class="form-control" type="text" id="username" name="username"
+                                    placeholder="6-30 characters long with no spaces." required>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <!-- Password strength checker https://jsbin.com/malopev/edit?html,js,output https://www.kurmis.com/2019/11/01/password-strength-javascript.html -->
+                            <div class="mb-3">
+                                <label class="form-label" for="password">Password</label>
+                                <input class="form-control" type="password" id="password" name="password"
+                                    placeholder="password" required>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="confirm_password">Confirm Password</label>
+                                <input class="form-control mb-1" type="password" id="confirm_password"
+                                    name="confirm_password" placeholder="confirm password" required>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                                <span id="message"></span>
+                                <!--DISPLAYS NOT MATCHING OR MATCHING-->
+                            </div>
+                            <hr>
+                            <div class="mb-3">
+                                <!-- https://www.youtube.com/watch?v=z_R13WXXovw video on styling of progress bar -->
+                                <!-- <progress id="strength" value="0" max="4"></progress> -->
+                                <p>Password Strength Requirements:</p>
+                                <hr>
+                                <ul>
+                                    <li class="length pw-unmet pw-confirm-unmet">At least 8 characters long.</li>
+                                    <li class="lower pw-unmet pw-confirm-unmet">Contains a lowercase letter.</li>
+                                    <li class="upper pw-unmet pw-confirm-unmet">Contains an uppercase letter.</li>
+                                    <li class="number pw-unmet pw-confirm-unmet">Contains a number.</li>
+                                    <li class="special pw-unmet pw-confirm-unmet">Contains a special character.</li>
+                                    <li class="bonus pw-unmet pw-confirm-unmet">Even better if longer than 12 characters
+                                    </li>
+                                </ul>
+                            </div>
+                            <hr>
+                            <p>Please read our <a href="/disclaimer" target="_blank">Disclaimer</a></p>
+                            <div class="d-grid mb-3">
+                                <button class="btn btn-success register" disabled>Register</button>
+                            </div>
+                            <div class="d-grid mb-3">
+                                <a href="/login" class="btn btn-dark">Login Instead</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- Inspired by https://mdbootstrap.com/docs/standard/navigation/footer/ -->
+    <footer class="footer mt-auto bg-dark text-center text-lg-start">
+        <div class="container p-2">
+            <div class="row text-light">
+                    <% if(settings !==null) { %>
+                        <div class=" mb-4 mb-lg-0 col-lg-2">
+                            <h5>QUICK LINKS</h5>
+                            <ul class="list-unstyled mb-0">
+                                <li>
+                                    <a href="<%=settings.QL1URL%>" target="_blank" class="text-decoration-none footer-link"><%=settings.QL1Label%></a>
+                                </li>
+                                <li>
+                                    <a href="<%=settings.QL2URL%>" target="_blank" class="text-decoration-none footer-link"><%=settings.QL2Label%></a>
+                                </li>
+                                <li>
+                                    <a href="<%=settings.QL3URL%>" target="_blank" class="text-decoration-none footer-link"><%=settings.QL3Label%></a>
+                                </li>
+                                <li>
+                                    <a href="<%=settings.QL4URL%>" target="_blank" class="text-decoration-none footer-link"><%=settings.QL4Label%></a>
+                                </li>
+                                <li>
+                                    <a href="/" target="_blank" class="text-decoration-none footer-link">Home</a>
+                                </li>
+                                <li>
+                                    <a href="/aboutus" target="_blank" class="text-decoration-none footer-link">About Us</a>
+                                </li>
+                                <li>
+                                    <a href="/disclaimer" target="_blank"
+                                        class="text-decoration-none footer-link">Disclaimer</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class=" mb-4 mb-lg-0 col-lg-5">
+                            <h5>CONTACT</h5>
+                            <ul class="list-unstyled mb-0">
+                                <% if(settings.email) { %> 
+                                <li>
+                                    <a href="mailto:<%=settings.email%>"
+                                        class="text-decoration-none footer-link"><i class="fas fa-envelope"></i>
+                                        <%=settings.email%></a>
+                                </li>
+                                <% } %> 
+                                <% if(settings.phone && settings.phoneLabel) { %> 
+                                <li>
+                                    <a href="tel:<%=settings.phone%>" class="text-decoration-none footer-link"><i
+                                            class="fas fa-phone-alt"></i> <%=settings.phoneLabel%></a>
+                                </li>
+                                <% } %> 
+                                <% if(settings.hours) { %> 
+                                <li>
+                                    <a class="text-decoration-none footer-link"><i class="fas fa-clock"></i> <%=settings.hours%></a>
+                                </li>
+                                <% } %> 
+                                <% if(settings.address) { %> 
+                                <li>
+                                    <a href="https://maps.google.com/?q=<%=settings.address%>"
+                                        target="_blank" class="text-decoration-none footer-link"><i
+                                            class="fas fa-map-marker-alt"></i> <%=settings.address%></a>
+                                </li>
+                                <% } %> 
+                                <% if(settings.socialURL && settings.socialIcon && settings.socialLabel) { %> 
+                                <li>
+                                    <a href="<%=settings.socialURL%>" target="_blank"
+                                        class="text-decoration-none footer-link"><i class="<%=settings.socialIcon%>"></i>
+                                        <%=settings.socialLabel%></a>
+                                </li>
+                                <% } %> 
+                                <% if(settings.payURL && settings.payLabel) { %> 
+                                <li>
+                                    <a href="<%=settings.payURL%>" target="_blank" class="text-decoration-none footer-link"><i
+                                            class="fas fa-dollar-sign"></i> <%=settings.payLabel%></a>
+                                </li>
+                                <% } %> 
+                            </ul>
+                        </div>
+                        <% } else { %>
+                            <p>Please configure the Site Settings in the Teacher Portal.</p>
+                            <% } %>
+            </div>
+        </div>
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
+            <span class="text-light">&copy 2021 LibertyLaunchGroup</span>
+        </div>
+    </footer>
+    <script src="/scripts/popper.min.js"></script>
+    <script src="/scripts/bootstrap.min.js"></script>
+    <script src="/scripts/validateForms.js"></script>
+    <script src="/scripts/jquery.min.js"></script>
+    <script src="/scripts/register.js"></script>
+</body>
+
+</html>
+
+
+

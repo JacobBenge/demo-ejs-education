@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Homework | Demo EJS Education</title>
+    <link href="/styles/bootstrap.min.css" rel="stylesheet">
+    <link href="/styles/default.css" rel="stylesheet">
+    <link rel="stylesheet" href="/styles/all.min.css">
+</head>
+
+<body class="d-flex flex-column vh-100">
+    <%- include('../partials/teacher-navbar') %>
+    <main class="container mt-5">
+        <%- include('../partials/flash.ejs') %>
+        <div class="row">
+            <div class="card shadow mb-5">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-2 mt-2">
+                            <a href="/homework/<%=homework._id%>" class="btn btn-dark font-weight-bold mb-1"><i class="fas fa-chevron-left"></i></a>
+                        </div>
+                        <h1 class="col-8 text-center mt-4">Edit Homework</h1>
+                        <div class="col-2"></div>
+                    </div>
+                    <form action="/homework/<%=homework._id%>?_method=PUT" method="POST" novalidate
+                        class="validated-form">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="mb-3">
+                                            <label class="form-label" for="subjectLine">Subject Line</label>
+                                            <input class="form-control" type="text" placeholder="Title" value="<%=homework.subjectLine%>"
+                                                id="subjectLine" name="homework[subjectLine]" required autofocus>
+                                            <div class="valid-feedback">
+                                                Looks good!
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="mb-3">
+                                            <label class="form-label" for="category"><i class="fas fa-tags"></i>
+                                                Category</label>
+                                            <input class="form-control" type="text" id="category" placeholder="Math" value="<%=homework.category%>"
+                                                name="homework[category]" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="mb-3">
+                                            <label class="form-label" for="dueDate">Due Date</label>
+                                            <input class="form-control" type="date" id="dueDate" name="homework[dueDate]" value="<%=homework.dueDate.toISOString().substring(0, 10)%>"
+                                                required>
+                                            <div class="valid-feedback">
+                                                Looks good!
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="mb-3">
+                                            <label class="form-label" for="pointsPossible">Coins Possible</label>
+                                            <input class="form-control" type="number" id="pointsPossible" value="<%=homework.pointsPossible%>"
+                                                name="homework[pointsPossible]" placeholder="20" required> 
+                                            <div class="valid-feedback">
+                                                Looks good!
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="mb-3">
+                                            <label class="form-label" for="urlLabel">Related Link Label (opt)</label>
+                                            <input class="form-control" type="text"
+                                                placeholder="Tutorial Video" value="<%=homework.urlLabel%>" id="urlLabel" name="homework[urlLabel]">
+                                            <div class="valid-feedback">
+                                                Looks good!
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="mb-3">
+                                            <label class="form-label" for="url">Related Link (opt)</label>
+                                            <input class="form-control" type="text" value="<%=homework.url%>"
+                                                placeholder="https://www.youtube.com/..." id="url" name="homework[url]">
+                                            <div class="valid-feedback">
+                                                Looks good!
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="mb-3">
+                                            <label class="form-label" for="stuId">Assigned to Student</label>
+                                            <select class="form-select" id="stuId"
+                                                name="homework[stuId]" required>
+                                                <option value="<%=homework.stuId%>" selected><%=homework.assignedStudent%></option>
+                                                <% for(let student of students) { %>
+                                                    <option value="<%=student._id%>">
+                                                        <%=student.firstName%>
+                                                            <%=student.lastName%>
+                                                    </option>
+                                                    <% } %>
+                                            </select>
+                                            <div class="valid-feedback">
+                                                Looks good!
+                                            </div>
+                                        </div>
+                                    </div>
+    
+                                    <div class="mb-3">
+                                        <label class="form-label" for="description">Description</label>
+                                        <textarea class="form-control rounded-0" id="description"
+                                            name="homework[description]" rows="7"
+                                            placeholder="For this assignment, you must ..." required><%=homework.description%></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="mb-3 mt-3 text-center">
+                                        <button class="btn btn-lg btn-success"><i class="fas fa-clipboard-check"></i> Update
+                                            Homework</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <p class="text-center"><a href="/homework/<%=homework._id%>" class="mb-3 btn btn-lg btn-danger"><i
+                                class="fas fa-times"></i> Cancel</a></p>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- Inspired by https://mdbootstrap.com/docs/standard/navigation/footer/ -->
+    <footer class="footer mt-auto bg-dark text-center text-lg-start">
+        <div class="container p-2">
+            <div class="row text-light">
+                    <% if(settings !==null) { %>
+                        <div class=" mb-4 mb-lg-0 col-lg-2">
+                            <h5>QUICK LINKS</h5>
+                            <ul class="list-unstyled mb-0">
+                                <li>
+                                    <a href="<%=settings.QL1URL%>" target="_blank" class="text-decoration-none footer-link"><%=settings.QL1Label%></a>
+                                </li>
+                                <li>
+                                    <a href="<%=settings.QL2URL%>" target="_blank" class="text-decoration-none footer-link"><%=settings.QL2Label%></a>
+                                </li>
+                                <li>
+                                    <a href="<%=settings.QL3URL%>" target="_blank" class="text-decoration-none footer-link"><%=settings.QL3Label%></a>
+                                </li>
+                                <li>
+                                    <a href="<%=settings.QL4URL%>" target="_blank" class="text-decoration-none footer-link"><%=settings.QL4Label%></a>
+                                </li>
+                                <li>
+                                    <a href="/" target="_blank" class="text-decoration-none footer-link">Home</a>
+                                </li>
+                                <li>
+                                    <a href="/aboutus" target="_blank" class="text-decoration-none footer-link">About Us</a>
+                                </li>
+                                <li>
+                                    <a href="/disclaimer" target="_blank"
+                                        class="text-decoration-none footer-link">Disclaimer</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class=" mb-4 mb-lg-0 col-lg-5">
+                            <h5>CONTACT</h5>
+                            <ul class="list-unstyled mb-0">
+                                <% if(settings.email) { %> 
+                                <li>
+                                    <a href="mailto:<%=settings.email%>"
+                                        class="text-decoration-none footer-link"><i class="fas fa-envelope"></i>
+                                        <%=settings.email%></a>
+                                </li>
+                                <% } %> 
+                                <% if(settings.phone && settings.phoneLabel) { %> 
+                                <li>
+                                    <a href="tel:<%=settings.phone%>" class="text-decoration-none footer-link"><i
+                                            class="fas fa-phone-alt"></i> <%=settings.phoneLabel%></a>
+                                </li>
+                                <% } %> 
+                                <% if(settings.hours) { %> 
+                                <li>
+                                    <a class="text-decoration-none footer-link"><i class="fas fa-clock"></i> <%=settings.hours%></a>
+                                </li>
+                                <% } %> 
+                                <% if(settings.address) { %> 
+                                <li>
+                                    <a href="https://maps.google.com/?q=<%=settings.address%>"
+                                        target="_blank" class="text-decoration-none footer-link"><i
+                                            class="fas fa-map-marker-alt"></i> <%=settings.address%></a>
+                                </li>
+                                <% } %> 
+                                <% if(settings.socialURL && settings.socialIcon && settings.socialLabel) { %> 
+                                <li>
+                                    <a href="<%=settings.socialURL%>" target="_blank"
+                                        class="text-decoration-none footer-link"><i class="<%=settings.socialIcon%>"></i>
+                                        <%=settings.socialLabel%></a>
+                                </li>
+                                <% } %> 
+                                <% if(settings.payURL && settings.payLabel) { %> 
+                                <li>
+                                    <a href="<%=settings.payURL%>" target="_blank" class="text-decoration-none footer-link"><i
+                                            class="fas fa-dollar-sign"></i> <%=settings.payLabel%></a>
+                                </li>
+                                <% } %> 
+                            </ul>
+                        </div>
+                        <div class=" mb-4 mb-lg-0 col-lg-5">
+                            <h5>TEACHER LINKS</h5>
+                            <ul class="list-unstyled mb-0">
+                                <li>
+                                    <a href="<%=settings.TL1URL%>" target="_blank" class="text-decoration-none footer-link"><%=settings.TL1Label%></a>
+                                </li>
+                                <li>
+                                    <a href="<%=settings.TL2URL%>" target="_blank" class="text-decoration-none footer-link"><%=settings.TL2Label%></a>
+                                </li>
+                                <li>
+                                    <a href="<%=settings.TL3URL%>" target="_blank" class="text-decoration-none footer-link"><%=settings.TL3Label%></a>
+                                </li>
+                                <li>
+                                    <a href="<%=settings.TL4URL%>" target="_blank" class="text-decoration-none footer-link"><%=settings.TL4Label%></a>
+                                </li>
+                            </ul>
+                        </div>
+                        <% } else { %>
+                            <p>Please configure the Site Settings in the Teacher Portal.</p>
+                            <% } %>
+            </div>
+        </div>
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
+            <span class="text-light">&copy 2021 LibertyLaunchGroup</span>
+        </div>
+    </footer>
+    <script src="/scripts/popper.min.js"></script>
+    <script src="/scripts/bootstrap.min.js"></script>
+    <script src="/scripts/validateForms.js"></script>
+</body>
+
+</html>

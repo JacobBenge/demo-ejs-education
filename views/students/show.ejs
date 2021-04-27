@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Details | Demo EJS Education</title>
+    <link href="/styles/bootstrap.min.css" rel="stylesheet">
+    <link href="/styles/default.css" rel="stylesheet">
+    <link rel="stylesheet" href="/styles/all.min.css">
+</head>
+
+<body class="d-flex flex-column vh-100">
+    <%- include('../partials/teacher-navbar') %>
+    <main class="container mt-5">
+        <%- include('../partials/flash.ejs') %>
+        <div class="row">
+            <div class="card shadow mb-5">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-2 mt-2">
+                            <a href="/students/" class="btn btn-dark font-weight-bold mb-1"><i
+                                    class="fas fa-chevron-left"></i></a>
+                        </div>
+                        <h1 class="text-center mt-4 col-sm-8">
+                            <% if(student.prefName != "") { %> 
+                            <%=student.prefName%>
+                            <% } else {  %>
+                                <%=student.firstName%>
+                                <% } %>
+                                <%=student.lastName%>'s Profile
+                        </h1>
+                        <div class="col-sm-2 mt-4">
+                            <a href="#note-form" class="btn btn-primary"><i class="fas fa-chevron-down"></i> Notes</a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <!-- Student Information -->
+                            <h2 class="mt-4 form-subtitle">Personal Info</h2>
+                            <hr>
+                            <dl class="row">
+                                <dt class="col-sm-4">Registration Code:</dt>
+                                <dd class="col-sm-8">
+                                    <%=student._id%>
+                                </dd>
+                                <dt class="col-sm-4">First Name:</dt>
+                                <dd class="col-sm-8">
+                                    <%=student.firstName%>
+                                </dd>
+                                <dt class="col-sm-4">Last Name:</dt>
+                                <dd class="col-sm-8">
+                                    <%=student.lastName%>
+                                </dd>
+                                <dt class="col-sm-4">Preferred Name:</dt>
+                                <dd class="col-sm-8">
+                                    <%=student.prefName%>
+                                </dd>
+                                <dt class="col-sm-4">Birth Date:</dt>
+                                <dd class="col-sm-8">
+                                    <%=student.dateOfBirth.toISOString().substring(0, 10)%>
+                                </dd>
+                                <dt class="col-sm-4">Gender:</dt>
+                                <dd class="col-sm-8">
+                                    <%=student.gender%>
+                                </dd>
+                                <dt class="col-sm-4">School Year:</dt>
+                                <dd class="col-sm-8">
+                                    <%=student.schoolYear%>
+                                </dd>
+                                <dt class="col-sm-4">Address Line 1:</dt>
+                                <dd class="col-sm-8">
+                                    <%=student.addressLine1%>
+                                </dd>
+                                <dt class="col-sm-4">Address Line 2:</dt>
+                                <dd class="col-sm-8">
+                                    <%=student.addressLine2%>
+                                </dd>
+                                <dt class="col-sm-4">City:</dt>
+                                <dd class="col-sm-8">
+                                    <%=student.city%>
+                                </dd>
+                                <dt class="col-sm-4">State:</dt>
+                                <dd class="col-sm-8">
+                                    <%=student.stateCode%>
+                                </dd>
+                                <dt class="col-sm-4">Zip Code:</dt>
+                                <dd class="col-sm-8">
+                                    <%=student.zipCodeBase%>
+                                        <!-- show or hide a dash depending if extension is present -->
+                                        <% if(student.zipCodeExtension) { %>
+                                            <span>-</span>
+                                            <% } %>
+                                                <%=student.zipCodeExtension%>
+                                </dd>
+                                <dt class="col-sm-4">Special Notes:</dt>
+                                <dd class="col-sm-8">
+                                    <%=student.notes%>
+                                </dd>
+                            </dl>
+                        </div>
+                        <div class="col-sm-6">
+                            <!-- Student Portal Info -->
+                            <h2 class="mt-4 form-subtitle">Student Portal</h2>
+                            <hr>
+                            <dl class="row">
+                                <dt class="col-sm-4">Rewards Coin Balance:</dt>
+                                <dd class="col-sm-8">
+                                    <i class="fas fa-coins"></i>
+                                    <%=student.coinsBalance%>
+                                </dd>
+                            </dl>
+                            <!-- Hide if blank -->
+                            <% if(student.url1 && student.url1Label){ %>
+                                <a href="<%=student.url1%>" target="_blank" class="btn btn-success mb-1">
+                                    <i class="fas fa-external-link-alt"></i>
+                                    <%=student.url1Label%>
+                                </a>
+                                <% } %>
+                                    <% if(student.url2 && student.url2Label){ %>
+                                        <a href="<%=student.url2%>" target="_blank" class="btn btn-warning mb-1">
+                                            <i class="fas fa-external-link-alt"></i>
+                                            <%=student.url2Label%>
+                                        </a>
+                                        <% } %>
+                                            <% if(student.url3 && student.url3Label){ %>
+                                                <a href="<%=student.url3%>" target="_blank" class="btn btn-info mb-1">
+                                                    <i class="fas fa-external-link-alt"></i>
+                                                    <%=student.url3Label%>
+                                                </a>
+                                                <% } %>
+                                                    <% if(student.url4 && student.url4Label){ %>
+                                                        <a href="<%=student.url4%>" target="_blank" class="btn btn-danger mb-1">
+                                                            <i class="fas fa-external-link-alt"></i>
+                                                            <%=student.url4Label%>
+                                                        </a>
+                                                        <% } %>
+                        </div>
+                    </div>
+                    <!-- Contacts -->
+                    <div class="row">
+                        <h2 class="mt-4 form-subtitle">Contacts</h2>
+                        <hr>
+                        <dl class="row">
+                            <div class="col-sm-4">
+                                <h4>Primary</h4>
+                                <dt class="col-sm-4">First Name:</dt>
+                                <dd class="col-sm-8">
+                                    <%=student.primaryContactFirst%>
+                                </dd>
+                                <dt class="col-sm-4">Last Name:</dt>
+                                <dd class="col-sm-8">
+                                    <%=student.primaryContactLast%>
+                                </dd>
+                                <dt class="col-sm-4">Phone:</dt>
+                                <dd class="col-sm-8">
+                                    <%=student.primaryContactPhone%>
+                                </dd>
+                                <dt class="col-sm-4">Email:</dt>
+                                <dd class="col-sm-8">
+                                    <%=student.primaryContactEmail%>
+                                </dd>
+                                <dt class="col-sm-4">Relationship:</dt>
+                                <dd class="col-sm-8">
+                                    <%=student.primaryContactRelationship%>
+                                </dd>
+                            </div>
+                            <div class="col-sm-4">
+                                <h4>Emergency 1</h4>
+                                <dt class="col-sm-4">First Name:</dt>
+                                <dd class="col-sm-8">
+                                    <%=student.emergPrimFirst%>
+                                </dd>
+                                <dt class="col-sm-4">Last Name:</dt>
+                                <dd class="col-sm-8">
+                                    <%=student.emergPrimLast%>
+                                </dd>
+                                <dt class="col-sm-4">Phone:</dt>
+                                <dd class="col-sm-8">
+                                    <%=student.emergPrimPhone%>
+                                </dd>
+                                <dt class="col-sm-4">Email:</dt>
+                                <dd class="col-sm-8">
+                                    <%=student.emergPrimEmail%>
+                                </dd>
+                                <dt class="col-sm-4">Relationship:</dt>
+                                <dd class="col-sm-8">
+                                    <%=student.emergPrimRelationship%>
+                                </dd>
+                            </div>
+                            <div class="col-sm-4">
+                                <h4>Emergency 2</h4>
+                                <dt class="col-sm-4">First Name:</dt>
+                                <dd class="col-sm-8">
+                                    <%=student.emergSecFirst%>
+                                </dd>
+                                <dt class="col-sm-4">Last Name:</dt>
+                                <dd class="col-sm-8">
+                                    <%=student.emergSecLast%>
+                                </dd>
+                                <dt class="col-sm-4">Phone:</dt>
+                                <dd class="col-sm-8">
+                                    <%=student.emergSecPhone%>
+                                </dd>
+                                <dt class="col-sm-4">Email:</dt>
+                                <dd class="col-sm-8">
+                                    <%=student.emergSecEmail%>
+                                </dd>
+                                <dt class="col-sm-4">Relationship:</dt>
+                                <dd class="col-sm-8">
+                                    <%=student.emergSecRelationship%>
+                                </dd>
+                            </div>
+                        </dl>
+                    </div>
+                    <p class="text-muted mb-0"><small>Created By: <%=student.createdBy%> on
+                                <%=student.createDate.toISOString().substring(0, 10)%> </small></p>
+                    <% if(student.lastModifiedBy) { %>
+                        <p class="text-muted mb-0"><small>Last Modified By: <%=student.lastModifiedBy%> on
+                                    <%=student.lastModifiedDate.toISOString().substring(0, 10)%> </small></p>
+                        <% } %>
+                            <p class="text-end"><a href="/students/<%=student._id%>/edit" class="mt-5 btn btn-info"><i
+                                        class="fas fa-user-edit"></i> Edit</a></p>
+                            <form class="col-12 mb-3 text-end" action="/students/<%=student._id%>?_method=DELETE"
+                                method="POST">
+                                <button class="btn btn-danger"
+                                    onclick="return confirm('Are you sure you want to permanently delete this student? All related notes will be automatically deleted. Homework assigned to this student will not be deleted, but will not be connected to the student if you recreate a new profile.')"><i
+                                        class="fas fa-trash-alt"></i> Delete</button>
+                            </form>
+                </div>
+            </div>
+        </div>
+        <!-- Notes -->
+        <div class="row">
+            <div class="card shadow mb-5">
+                <div class="card-body">
+                    <!-- ID is used by button at top of page -->
+                    <h2 id="note-form">New Note</h2>
+                    <form action="/students/<%=student._id%>/note" class="mb-3 validated-form" method="POST" novalidate>
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="mb-3">
+                                    <label class="form-label" for="noteTitle">Title</label>
+                                    <input class="form-control" type="text" id="noteTitle" placeholder="1:1 Weekly Session"
+                                        name="note[noteTitle]" required>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="mb-3">
+                                    <label class="form-label" for="noteCategory"><i class="fas fa-tags"></i>
+                                        Category</label>
+                                    <input class="form-control" type="text" id="noteCategory" placeholder="Fractions"
+                                        name="note[noteCategory]" required>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="mb-3">
+                                    <label class="form-label" for="noteDate">Date:</label>
+                                    <input class="form-control" type="date" id="noteDate" name="note[noteDate]" required>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="noteComment">Comments</label>
+                                <textarea class="form-control" name="note[noteComment]" id="noteComment" cols="30" rows="3"
+                                    placeholder="This week we worked on... we struggled with... assigned more practice homework for... Max of 5000 characters."></textarea>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <input type="checkbox" id="noteHide" name="note[noteHide]" value="true">
+                                <label class="form-label" for="noteHide"><i class="fas fa-eye-slash"></i> Hide this note
+                                    from <%=student.firstName%>'s
+                                        Progress Report</label>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                        </div>
+                        <button class="btn btn-success"><i class="far fa-sticky-note"></i> Add Note</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- Search Notes -->
+        <div class="row">
+            <div class="card shadow mb-2">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="mb-3">
+                            <label class="form-label" for="search-bar"><i class="fas fa-filter"></i> Filter By:</label>
+                            <input class="form-control" type="text" id="search-bar"
+                                placeholder="Title, Category, or Date (YYYY-MM-DD)">
+                        </div>
+                        <p class="text-end text-muted mb-0"><small>Find Hotkeys:</small> Ctrl+f or ⌘+f (Mac)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Past Notes -->
+        <!-- Sorts by noteDate newest first -->
+        <% const sortedNotes=student.note.sort((a, b)=> b.noteDate - a.noteDate) %>
+            <% for(let note of sortedNotes) { %>
+                <div
+                    class="filterDiv <%=note.noteCategory%> <%=note.noteTitle%> <%=note.noteDate.toISOString().substring(0, 10)%>">
+                    <div class="row">
+                        <div class="card shadow mb-3">
+                            <div class="card-body">
+                                <h5 class="card-title mb-2">
+                                    <%=note.noteTitle%>
+                                        <% if(!note.noteTitle) { %>
+                                            Untitled
+                                            <% } %>
+                                </h5>
+                                <p class="card-text mt-3">
+                                    <%=note.noteComment%>
+                                </p>
+                                <span class="badge rounded-pill bg-secondary">
+                                    <i class="fas fa-calendar-alt"></i> <%=note.noteDate.toISOString().substring(0, 10)%>
+                                </span>
+                                <span class="badge rounded-pill bg-info">
+                                    <i class="fas fa-tags"></i>
+                                    <%=note.noteCategory%>
+                                </span>
+                                <% if(note.noteHide==true) { %>
+                                    <span class="badge rounded-pill bg-warning">
+                                        <i class="fas fa-eye-slash"></i> Hidden
+                                    </span>
+                                    <% } %>
+                                        <p class="text-muted mb-0"><small>Created By: <%=note.createdBy%> on
+                                                    <%=note.createDate.toISOString().substring(0, 10)%> </small></p>
+                                        <div class="row">
+                                            <div class="text-end">
+                                                <form action="/students/<%=student._id%>/note/<%=note._id%>?_method=DELETE"
+                                                    method="POST">
+                                                    <button class="btn btn-sm btn-danger"
+                                                        onclick="return confirm('Are you sure you want to permanently delete this note?')"><i
+                                                            class="fas fa-trash-alt"></i> Delete</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <% } %>
+    </main>
+    <!-- Inspired by https://mdbootstrap.com/docs/standard/navigation/footer/ -->
+    <footer class="footer mt-auto bg-dark text-center text-lg-start">
+        <div class="container p-2">
+            <div class="row text-light">
+                    <% if(settings !==null) { %>
+                        <div class=" mb-4 mb-lg-0 col-lg-2">
+                            <h5>QUICK LINKS</h5>
+                            <ul class="list-unstyled mb-0">
+                                <li>
+                                    <a href="<%=settings.QL1URL%>" target="_blank" class="text-decoration-none footer-link"><%=settings.QL1Label%></a>
+                                </li>
+                                <li>
+                                    <a href="<%=settings.QL2URL%>" target="_blank" class="text-decoration-none footer-link"><%=settings.QL2Label%></a>
+                                </li>
+                                <li>
+                                    <a href="<%=settings.QL3URL%>" target="_blank" class="text-decoration-none footer-link"><%=settings.QL3Label%></a>
+                                </li>
+                                <li>
+                                    <a href="<%=settings.QL4URL%>" target="_blank" class="text-decoration-none footer-link"><%=settings.QL4Label%></a>
+                                </li>
+                                <li>
+                                    <a href="/" target="_blank" class="text-decoration-none footer-link">Home</a>
+                                </li>
+                                <li>
+                                    <a href="/aboutus" target="_blank" class="text-decoration-none footer-link">About Us</a>
+                                </li>
+                                <li>
+                                    <a href="/disclaimer" target="_blank"
+                                        class="text-decoration-none footer-link">Disclaimer</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class=" mb-4 mb-lg-0 col-lg-5">
+                            <h5>CONTACT</h5>
+                            <ul class="list-unstyled mb-0">
+                                <% if(settings.email) { %> 
+                                <li>
+                                    <a href="mailto:<%=settings.email%>"
+                                        class="text-decoration-none footer-link"><i class="fas fa-envelope"></i>
+                                        <%=settings.email%></a>
+                                </li>
+                                <% } %> 
+                                <% if(settings.phone && settings.phoneLabel) { %> 
+                                <li>
+                                    <a href="tel:<%=settings.phone%>" class="text-decoration-none footer-link"><i
+                                            class="fas fa-phone-alt"></i> <%=settings.phoneLabel%></a>
+                                </li>
+                                <% } %> 
+                                <% if(settings.hours) { %> 
+                                <li>
+                                    <a class="text-decoration-none footer-link"><i class="fas fa-clock"></i> <%=settings.hours%></a>
+                                </li>
+                                <% } %> 
+                                <% if(settings.address) { %> 
+                                <li>
+                                    <a href="https://maps.google.com/?q=<%=settings.address%>"
+                                        target="_blank" class="text-decoration-none footer-link"><i
+                                            class="fas fa-map-marker-alt"></i> <%=settings.address%></a>
+                                </li>
+                                <% } %> 
+                                <% if(settings.socialURL && settings.socialIcon && settings.socialLabel) { %> 
+                                <li>
+                                    <a href="<%=settings.socialURL%>" target="_blank"
+                                        class="text-decoration-none footer-link"><i class="<%=settings.socialIcon%>"></i>
+                                        <%=settings.socialLabel%></a>
+                                </li>
+                                <% } %> 
+                                <% if(settings.payURL && settings.payLabel) { %> 
+                                <li>
+                                    <a href="<%=settings.payURL%>" target="_blank" class="text-decoration-none footer-link"><i
+                                            class="fas fa-dollar-sign"></i> <%=settings.payLabel%></a>
+                                </li>
+                                <% } %> 
+                            </ul>
+                        </div>
+                        <div class=" mb-4 mb-lg-0 col-lg-5">
+                            <h5>TEACHER LINKS</h5>
+                            <ul class="list-unstyled mb-0">
+                                <li>
+                                    <a href="<%=settings.TL1URL%>" target="_blank" class="text-decoration-none footer-link"><%=settings.TL1Label%></a>
+                                </li>
+                                <li>
+                                    <a href="<%=settings.TL2URL%>" target="_blank" class="text-decoration-none footer-link"><%=settings.TL2Label%></a>
+                                </li>
+                                <li>
+                                    <a href="<%=settings.TL3URL%>" target="_blank" class="text-decoration-none footer-link"><%=settings.TL3Label%></a>
+                                </li>
+                                <li>
+                                    <a href="<%=settings.TL4URL%>" target="_blank" class="text-decoration-none footer-link"><%=settings.TL4Label%></a>
+                                </li>
+                            </ul>
+                        </div>
+                        <% } else { %>
+                            <p>Please configure the Site Settings in the Teacher Portal.</p>
+                            <% } %>
+            </div>
+        </div>
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
+            <span class="text-light">&copy 2021 LibertyLaunchGroup</span>
+        </div>
+    </footer>
+    <script src="/scripts/popper.min.js"></script>
+    <script src="/scripts/bootstrap.min.js"></script>
+    <script src="/scripts/validateForms.js"></script>
+    <script src="/scripts/filter.js"></script>
+</body>
+
+</html>           

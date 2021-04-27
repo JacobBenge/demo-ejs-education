@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo EJS Education</title>
+    <link href="/styles/bootstrap.min.css" rel="stylesheet"> 
+    <link href="/styles/default.css" rel="stylesheet">
+    <link rel="stylesheet" href="/styles/all.min.css">
+</head>
+
+<body class="d-flex flex-column vh-100">
+    <%- include('./partials/default-navbar') %>
+    <main class="container mt-5">
+        <%- include('./partials/flash.ejs') %>
+        <div class="container d-flex justify-content-center align-items-center mt-3">
+            <div class="row">
+                <div class="card shadow mb-5">
+                    <div class="card-body">
+                        <h5 class="text-center">DISCLAIMER & LICENSE</h5> <br>
+                        <p class="text-dark">This is a demo version of the website, so it's been de-personalized and the admin registration code is available as the placeholder on the registration page. This website was created as capstone project by college students to fulfill requirements for a senior capstone project.</p>
+                        <p class="text-dark">Icons were obtained from Font Awesome and Icon Finder. The home page image was obtained from Unsplash. </p> <hr>
+                        <p class="text-muted">MIT License <br><br>
+    
+                            Copyright (c) 2021 LibertyLaunchGroup<br><br>
+    
+                            Permission is hereby granted, free of charge, to any person obtaining a copy
+                            of this software and associated documentation files (the "Software"), to deal
+                            in the Software without restriction, including without limitation the rights
+                            to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+                            copies of the Software, and to permit persons to whom the Software is
+                            furnished to do so, subject to the following conditions:<br><br>
+    
+                            The above copyright notice and this permission notice shall be included in all
+                            copies or substantial portions of the Software.<br><br>
+    
+                            THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+                            IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+                            FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+                            AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+                            LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+                            OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+                            SOFTWARE.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- Inspired by https://mdbootstrap.com/docs/standard/navigation/footer/ -->
+    <footer class="footer mt-auto bg-dark text-center text-lg-start">
+        <div class="container p-2">
+            <div class="row text-light">
+                    <% if(settings !==null) { %>
+                        <div class=" mb-4 mb-lg-0 col-lg-2">
+                            <h5>QUICK LINKS</h5>
+                            <ul class="list-unstyled mb-0">
+                                <li>
+                                    <a href="<%=settings.QL1URL%>" target="_blank" class="text-decoration-none footer-link"><%=settings.QL1Label%></a>
+                                </li>
+                                <li>
+                                    <a href="<%=settings.QL2URL%>" target="_blank" class="text-decoration-none footer-link"><%=settings.QL2Label%></a>
+                                </li>
+                                <li>
+                                    <a href="<%=settings.QL3URL%>" target="_blank" class="text-decoration-none footer-link"><%=settings.QL3Label%></a>
+                                </li>
+                                <li>
+                                    <a href="<%=settings.QL4URL%>" target="_blank" class="text-decoration-none footer-link"><%=settings.QL4Label%></a>
+                                </li>
+                                <li>
+                                    <a href="/" target="_blank" class="text-decoration-none footer-link">Home</a>
+                                </li>
+                                <li>
+                                    <a href="/aboutus" target="_blank" class="text-decoration-none footer-link">About Us</a>
+                                </li>
+                                <li>
+                                    <a href="/disclaimer" target="_blank"
+                                        class="text-decoration-none footer-link">Disclaimer</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class=" mb-4 mb-lg-0 col-lg-5">
+                            <h5>CONTACT</h5>
+                            <ul class="list-unstyled mb-0">
+                                <% if(settings.email) { %> 
+                                <li>
+                                    <a href="mailto:<%=settings.email%>"
+                                        class="text-decoration-none footer-link"><i class="fas fa-envelope"></i>
+                                        <%=settings.email%></a>
+                                </li>
+                                <% } %> 
+                                <% if(settings.phone && settings.phoneLabel) { %> 
+                                <li>
+                                    <a href="tel:<%=settings.phone%>" class="text-decoration-none footer-link"><i
+                                            class="fas fa-phone-alt"></i> <%=settings.phoneLabel%></a>
+                                </li>
+                                <% } %> 
+                                <% if(settings.hours) { %> 
+                                <li>
+                                    <a class="text-decoration-none footer-link"><i class="fas fa-clock"></i> <%=settings.hours%></a>
+                                </li>
+                                <% } %> 
+                                <% if(settings.address) { %> 
+                                <li>
+                                    <a href="https://maps.google.com/?q=<%=settings.address%>"
+                                        target="_blank" class="text-decoration-none footer-link"><i
+                                            class="fas fa-map-marker-alt"></i> <%=settings.address%></a>
+                                </li>
+                                <% } %> 
+                                <% if(settings.socialURL && settings.socialIcon && settings.socialLabel) { %> 
+                                <li>
+                                    <a href="<%=settings.socialURL%>" target="_blank"
+                                        class="text-decoration-none footer-link"><i class="<%=settings.socialIcon%>"></i>
+                                        <%=settings.socialLabel%></a>
+                                </li>
+                                <% } %> 
+                                <% if(settings.payURL && settings.payLabel) { %> 
+                                <li>
+                                    <a href="<%=settings.payURL%>" target="_blank" class="text-decoration-none footer-link"><i
+                                            class="fas fa-dollar-sign"></i> <%=settings.payLabel%></a>
+                                </li>
+                                <% } %> 
+                            </ul>
+                        </div>
+                        <% } else { %>
+                            <p>Please configure the Site Settings in the Teacher Portal.</p>
+                            <% } %>
+            </div>
+        </div>
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
+            <span class="text-light">&copy 2021 LibertyLaunchGroup</span>
+        </div>
+    </footer>
+    <script src="/scripts/popper.min.js"></script>
+    <script src="/scripts/bootstrap.min.js"></script>
+    <script src="/scripts/validateForms.js"></script>
+</body>
+
+</html>

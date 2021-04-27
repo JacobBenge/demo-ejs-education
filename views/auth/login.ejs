@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Demo EJS Education</title>
+    <link href="/styles/bootstrap.min.css" rel="stylesheet"> 
+    <link href="/styles/default.css" rel="stylesheet">
+    <link rel="stylesheet" href="/styles/all.min.css">
+</head>
+
+<body class="d-flex flex-column vh-100">
+    <%- include('../partials/default-navbar') %>
+    <main class="container mt-5">
+        <%- include('../partials/flash.ejs') %>
+        <div class="container d-flex justify-content-center align-items-center mt-3">
+            <div class="row">
+                <div class="card shadow mb-5">
+                    <img src="/img/LibertyLogo400px.png" class="card-img-top logo" alt="Logo">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">Login</h5>
+                        <form action="/login" method="POST" class="validated-form" novalidate>
+                            <div class="mb-3">
+                                <label class="form-label" for="username">Username</label>
+                                <input class="form-control" type="text" id="username" name="username" placeholder="username" autofocus required>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="password">Password</label>
+                                <input class="form-control" type="password" id="password" placeholder="password" name="password" required>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="d-grid mb-3">
+                                <button class="btn btn-success">Login</button>
+                            </div>
+                            <div class="d-grid mb-3">
+                                <a href="/register" class="btn btn-dark">Register Instead</a>
+                            </div>
+                            <p class="text-muted text-center">Forgot Password?<br>Contact your teacher to reset your password.</p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- Inspired by https://mdbootstrap.com/docs/standard/navigation/footer/ -->
+    <footer class="footer mt-auto bg-dark text-center text-lg-start">
+        <div class="container p-2">
+            <div class="row text-light">
+                    <% if(settings !==null) { %>
+                        <div class=" mb-4 mb-lg-0 col-lg-2">
+                            <h5>QUICK LINKS</h5>
+                            <ul class="list-unstyled mb-0">
+                                <li>
+                                    <a href="<%=settings.QL1URL%>" target="_blank" class="text-decoration-none footer-link"><%=settings.QL1Label%></a>
+                                </li>
+                                <li>
+                                    <a href="<%=settings.QL2URL%>" target="_blank" class="text-decoration-none footer-link"><%=settings.QL2Label%></a>
+                                </li>
+                                <li>
+                                    <a href="<%=settings.QL3URL%>" target="_blank" class="text-decoration-none footer-link"><%=settings.QL3Label%></a>
+                                </li>
+                                <li>
+                                    <a href="<%=settings.QL4URL%>" target="_blank" class="text-decoration-none footer-link"><%=settings.QL4Label%></a>
+                                </li>
+                                <li>
+                                    <a href="/" target="_blank" class="text-decoration-none footer-link">Home</a>
+                                </li>
+                                <li>
+                                    <a href="/aboutus" target="_blank" class="text-decoration-none footer-link">About Us</a>
+                                </li>
+                                <li>
+                                    <a href="/disclaimer" target="_blank"
+                                        class="text-decoration-none footer-link">Disclaimer</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class=" mb-4 mb-lg-0 col-lg-5">
+                            <h5>CONTACT</h5>
+                            <ul class="list-unstyled mb-0">
+                                <% if(settings.email) { %> 
+                                <li>
+                                    <a href="mailto:<%=settings.email%>"
+                                        class="text-decoration-none footer-link"><i class="fas fa-envelope"></i>
+                                        <%=settings.email%></a>
+                                </li>
+                                <% } %> 
+                                <% if(settings.phone && settings.phoneLabel) { %> 
+                                <li>
+                                    <a href="tel:<%=settings.phone%>" class="text-decoration-none footer-link"><i
+                                            class="fas fa-phone-alt"></i> <%=settings.phoneLabel%></a>
+                                </li>
+                                <% } %> 
+                                <% if(settings.hours) { %> 
+                                <li>
+                                    <a class="text-decoration-none footer-link"><i class="fas fa-clock"></i> <%=settings.hours%></a>
+                                </li>
+                                <% } %> 
+                                <% if(settings.address) { %> 
+                                <li>
+                                    <a href="https://maps.google.com/?q=<%=settings.address%>"
+                                        target="_blank" class="text-decoration-none footer-link"><i
+                                            class="fas fa-map-marker-alt"></i> <%=settings.address%></a>
+                                </li>
+                                <% } %> 
+                                <% if(settings.socialURL && settings.socialIcon && settings.socialLabel) { %> 
+                                <li>
+                                    <a href="<%=settings.socialURL%>" target="_blank"
+                                        class="text-decoration-none footer-link"><i class="<%=settings.socialIcon%>"></i>
+                                        <%=settings.socialLabel%></a>
+                                </li>
+                                <% } %> 
+                                <% if(settings.payURL && settings.payLabel) { %> 
+                                <li>
+                                    <a href="<%=settings.payURL%>" target="_blank" class="text-decoration-none footer-link"><i
+                                            class="fas fa-dollar-sign"></i> <%=settings.payLabel%></a>
+                                </li>
+                                <% } %> 
+                            </ul>
+                        </div>
+                        <% } else { %>
+                            <p>Please configure the Site Settings in the Teacher Portal.</p>
+                            <% } %>
+            </div>
+        </div>
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
+            <span class="text-light">&copy 2021 LibertyLaunchGroup</span>
+        </div>
+    </footer>
+    <script src="/scripts/popper.min.js"></script>
+    <script src="/scripts/bootstrap.min.js"></script>
+    <script src="/scripts/validateForms.js"></script>
+</body>
+
+</html>

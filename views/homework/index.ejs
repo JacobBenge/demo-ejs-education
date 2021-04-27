@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Homework | Demo EJS Education</title>
+    <link href="/styles/bootstrap.min.css" rel="stylesheet">
+    <link href="/styles/default.css" rel="stylesheet">
+    <link rel="stylesheet" href="/styles/all.min.css">
+</head>
+
+<body class="d-flex flex-column vh-100">
+    <%- include('../partials/teacher-navbar') %>
+    <main class="container mt-5">
+        <%- include('../partials/flash.ejs') %>
+        <div class="row">
+            <div class="card shadow mb-5">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-2 mt-2">
+                            <a href="/tportal/" class="btn btn-dark font-weight-bold mb-1"><i class="fas fa-chevron-left"></i></a>
+                        </div>
+                        <h1 class="col-sm-8 text-center mt-4">All Homework</h1>
+                        <div class="col-sm-2 mt-4">
+                            <a href="/homework/new" class="btn btn-primary"><i class="fas fa-book-open"></i> Add Homework</a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-2"><h6>Due Date</h6></div>
+                        <div class="col-sm-2"><h6>Subject</h6></div>
+                        <div class="col-sm-2"><h6>Category</h6></div>
+                        <div class="col-sm-3"><h6>Assigned To</h6></div>
+                        <div class="col-sm-2"><h6>Access</h6></div>
+                    </div>
+                    <hr>
+                    <!-- Sorted by newest to oldest -->
+                    <% const ascHomework = homework.sort((a, b) => a.dueDate.toISOString().substring(0, 10).localeCompare(b.dueDate.toISOString().substring(0, 10)))%>
+                    <% const descHomework = ascHomework.reverse(); %> 
+                    <% for (let hw of descHomework) { %>
+                    <div class="row">
+                        <div class="col-sm-2"><%= hw.dueDate.toISOString().substring(0, 10) %></div>
+                        <div class="col-sm-2"><%=hw.subjectLine%></div>
+                        <div class="col-sm-2"><%=hw.category%></div>
+                        <div class="col-sm-3"><%=hw.assignedStudent%></div>
+                        <div class="col-sm-2"><a class="btn btn-info" href="/homework/<%=hw._id%>"><i class="fas fa-long-arrow-alt-right"></i></a></div>
+                    </div>
+                    <hr class="plain">
+                    <% } %>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- Inspired by https://mdbootstrap.com/docs/standard/navigation/footer/ -->
+    <footer class="footer mt-auto bg-dark text-center text-lg-start">
+        <div class="container p-2">
+            <div class="row text-light">
+                    <% if(settings !==null) { %>
+                        <div class=" mb-4 mb-lg-0 col-lg-2">
+                            <h5>QUICK LINKS</h5>
+                            <ul class="list-unstyled mb-0">
+                                <li>
+                                    <a href="<%=settings.QL1URL%>" target="_blank" class="text-decoration-none footer-link"><%=settings.QL1Label%></a>
+                                </li>
+                                <li>
+                                    <a href="<%=settings.QL2URL%>" target="_blank" class="text-decoration-none footer-link"><%=settings.QL2Label%></a>
+                                </li>
+                                <li>
+                                    <a href="<%=settings.QL3URL%>" target="_blank" class="text-decoration-none footer-link"><%=settings.QL3Label%></a>
+                                </li>
+                                <li>
+                                    <a href="<%=settings.QL4URL%>" target="_blank" class="text-decoration-none footer-link"><%=settings.QL4Label%></a>
+                                </li>
+                                <li>
+                                    <a href="/" target="_blank" class="text-decoration-none footer-link">Home</a>
+                                </li>
+                                <li>
+                                    <a href="/aboutus" target="_blank" class="text-decoration-none footer-link">About Us</a>
+                                </li>
+                                <li>
+                                    <a href="/disclaimer" target="_blank"
+                                        class="text-decoration-none footer-link">Disclaimer</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class=" mb-4 mb-lg-0 col-lg-5">
+                            <h5>CONTACT</h5>
+                            <ul class="list-unstyled mb-0">
+                                <% if(settings.email) { %> 
+                                <li>
+                                    <a href="mailto:<%=settings.email%>"
+                                        class="text-decoration-none footer-link"><i class="fas fa-envelope"></i>
+                                        <%=settings.email%></a>
+                                </li>
+                                <% } %> 
+                                <% if(settings.phone && settings.phoneLabel) { %> 
+                                <li>
+                                    <a href="tel:<%=settings.phone%>" class="text-decoration-none footer-link"><i
+                                            class="fas fa-phone-alt"></i> <%=settings.phoneLabel%></a>
+                                </li>
+                                <% } %> 
+                                <% if(settings.hours) { %> 
+                                <li>
+                                    <a class="text-decoration-none footer-link"><i class="fas fa-clock"></i> <%=settings.hours%></a>
+                                </li>
+                                <% } %> 
+                                <% if(settings.address) { %> 
+                                <li>
+                                    <a href="https://maps.google.com/?q=<%=settings.address%>"
+                                        target="_blank" class="text-decoration-none footer-link"><i
+                                            class="fas fa-map-marker-alt"></i> <%=settings.address%></a>
+                                </li>
+                                <% } %> 
+                                <% if(settings.socialURL && settings.socialIcon && settings.socialLabel) { %> 
+                                <li>
+                                    <a href="<%=settings.socialURL%>" target="_blank"
+                                        class="text-decoration-none footer-link"><i class="<%=settings.socialIcon%>"></i>
+                                        <%=settings.socialLabel%></a>
+                                </li>
+                                <% } %> 
+                                <% if(settings.payURL && settings.payLabel) { %> 
+                                <li>
+                                    <a href="<%=settings.payURL%>" target="_blank" class="text-decoration-none footer-link"><i
+                                            class="fas fa-dollar-sign"></i> <%=settings.payLabel%></a>
+                                </li>
+                                <% } %> 
+                            </ul>
+                        </div>
+                        <div class=" mb-4 mb-lg-0 col-lg-5">
+                            <h5>TEACHER LINKS</h5>
+                            <ul class="list-unstyled mb-0">
+                                <li>
+                                    <a href="<%=settings.TL1URL%>" target="_blank" class="text-decoration-none footer-link"><%=settings.TL1Label%></a>
+                                </li>
+                                <li>
+                                    <a href="<%=settings.TL2URL%>" target="_blank" class="text-decoration-none footer-link"><%=settings.TL2Label%></a>
+                                </li>
+                                <li>
+                                    <a href="<%=settings.TL3URL%>" target="_blank" class="text-decoration-none footer-link"><%=settings.TL3Label%></a>
+                                </li>
+                                <li>
+                                    <a href="<%=settings.TL4URL%>" target="_blank" class="text-decoration-none footer-link"><%=settings.TL4Label%></a>
+                                </li>
+                            </ul>
+                        </div>
+                        <% } else { %>
+                            <p>Please configure the Site Settings in the Teacher Portal.</p>
+                            <% } %>
+            </div>
+        </div>
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
+            <span class="text-light">&copy 2021 LibertyLaunchGroup</span>
+        </div>
+    </footer>
+    <script src="/scripts/popper.min.js"></script>
+    <script src="/scripts/bootstrap.min.js"></script>
+    <script src="/scripts/validateForms.js"></script>
+</body>
+
+</html>

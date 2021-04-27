@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Site Settings | Demo EJS Education</title>
+    <link href="/styles/bootstrap.min.css" rel="stylesheet">
+    <link href="/styles/default.css" rel="stylesheet">
+    <link rel="stylesheet" href="/styles/all.min.css">
+</head>
+
+<body class="d-flex flex-column vh-100">
+    <%- include('../partials/teacher-navbar') %>
+    <main class="container mt-5">
+        <%- include('../partials/flash.ejs') %>
+        <% let courseIconList = {Art: "fas fa-palette",Biology: "fas fa-frog","Computer Science": "fas fa-laptop-code",Dance: "fas fa-child",English: "fas fa-book","Foreign Language": "fas fa-language",Geography: "fas fa-globe-americas",Math: "fas fa-calculator",Music: "fas fa-music","PE Wellness": "fas fa-running",Science: "fas fa-flask","Social Studies": "fas fa-landmark"}; %> 
+        <div class="row">
+            <div class="card shadow mb-5">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-2 mt-2">
+                            <a href="/setts/<%=sett._id%>" class="btn btn-dark font-weight-bold mb-1"><i class="fas fa-chevron-left"></i></a>
+                        </div>
+                        <h1 class="col-8 text-center mt-4">Edit Site Settings</h1>
+                        <div class="col-2"></div>
+                    </div>
+                    <p class="text-muted text-center">Enter a # if you want to disable a URL Link.</p>
+                    <form action="/setts/<%=sett._id%>?_method=PUT" method="POST" novalidate class="validated-form">
+                        <div class="row">
+                            <h2 class="mt-4 form-subtitle">Quick Links</h2>
+                            <hr>
+                            <p class="text-muted">These are found in the footer of every page.</p>
+                            <div class="mb-3 col-sm-4">
+                                <label class="form-label" for="QL1Label">Label for QL 1</label>
+                                <input class="form-control" type="text" placeholder="Label Name" id="QL1Label"
+                                    name="sett[QL1Label]" value="<%=sett.QL1Label%>" autofocus>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="mb-3 col-sm-8">
+                                <label class="form-label" for="QL1URL">URL for QL 1</label>
+                                <input class="form-control" type="text" placeholder="https://www..." id="QL1URL"
+                                    name="sett[QL1URL]" value="<%=sett.QL1URL%>">
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="mb-3 col-sm-4">
+                                <label class="form-label" for="QL2Label">Label for QL 2</label>
+                                <input class="form-control" type="text" placeholder="Label Name" id="QL2Label"
+                                    name="sett[QL2Label]" value="<%=sett.QL2Label%>" >
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="mb-3 col-sm-8">
+                                <label class="form-label" for="QL2URL">URL for QL 2</label>
+                                <input class="form-control" type="text" placeholder="https://www..." id="QL2URL"
+                                    name="sett[QL2URL]" value="<%=sett.QL2URL%>" >
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="mb-3 col-sm-4">
+                                <label class="form-label" for="QL3Label">Label for QL 3</label>
+                                <input class="form-control" type="text" placeholder="Label Name" id="QL3Label"
+                                    name="sett[QL3Label]" value="<%=sett.QL3Label%>" >
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="mb-3 col-sm-8">
+                                <label class="form-label" for="QL3URL">URL for QL 3</label>
+                                <input class="form-control" type="text" placeholder="https://www..." id="QL3URL"
+                                    name="sett[QL3URL]" value="<%=sett.QL3URL%>" >
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="mb-3 col-sm-4">
+                                <label class="form-label" for="QL4Label">Label for QL 4</label>
+                                <input class="form-control" type="text" placeholder="Label Name" id="QL4Label"
+                                    name="sett[QL4Label]" value="<%=sett.QL4Label%>" >
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="mb-3 col-sm-8">
+                                <label class="form-label" for="QL4URL">URL for QL 4</label>
+                                <input class="form-control" type="text" placeholder="https://www..." id="QL4URL"
+                                    name="sett[QL4URL]" value="<%=sett.QL4URL%>" >
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <h2 class="mt-4 form-subtitle">Teacher Links</h2>
+                            <hr>
+                            <p class="text-muted">These are only found in the footer Teacher Portal pages.</p>
+                            <div class="mb-3 col-sm-4">
+                                <label class="form-label" for="TL1Label">Label for TL 1</label>
+                                <input class="form-control" type="text" placeholder="Label Name" id="TL1Label"
+                                    name="sett[TL1Label]" value="<%=sett.TL1Label%>" >
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="mb-3 col-sm-8">
+                                <label class="form-label" for="TL1URL">URL for TL 1</label>
+                                <input class="form-control" type="text" placeholder="https://www..." id="TL1URL"
+                                    name="sett[TL1URL]" value="<%=sett.TL1URL%>" >
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="mb-3 col-sm-4">
+                                <label class="form-label" for="TL2Label">Label for TL 2</label>
+                                <input class="form-control" type="text" placeholder="Label Name" id="TL2Label"
+                                    name="sett[TL2Label]" value="<%=sett.TL2Label%>" >
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="mb-3 col-sm-8">
+                                <label class="form-label" for="TL2URL">URL for TL 2</label>
+                                <input class="form-control" type="text" placeholder="https://www..." id="TL2URL"
+                                    name="sett[TL2URL]" value="<%=sett.TL2URL%>" >
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="mb-3 col-sm-4">
+                                <label class="form-label" for="TL3Label">Label for TL 3</label>
+                                <input class="form-control" type="text" placeholder="Label Name" id="TL3Label"
+                                    name="sett[TL3Label]" value="<%=sett.TL3Label%>" >
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="mb-3 col-sm-8">
+                                <label class="form-label" for="TL3URL">URL for TL 3</label>
+                                <input class="form-control" type="text" placeholder="https://www..." id="TL3URL"
+                                    name="sett[TL3URL]" value="<%=sett.TL3URL%>" >
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="mb-3 col-sm-4">
+                                <label class="form-label" for="TL4Label">Label for TL 4</label>
+                                <input class="form-control" type="text" placeholder="Label Name" id="TL4Label"
+                                    name="sett[TL4Label]" value="<%=sett.TL4Label%>" >
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="mb-3 col-sm-8">
+                                <label class="form-label" for="TL4URL">URL for TL 4</label>
+                                <input class="form-control" type="text" placeholder="https://www..." id="TL4URL"
+                                    name="sett[TL4URL]" value="<%=sett.TL4URL%>" >
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <h2 class="mt-4 form-subtitle">Contact Information</h2>
+                            <hr>
+                            <p class="text-muted">This information is displayed on the footer of every page and on the Contact Us page.</p>
+                            <div class="mb-3 col-sm-6">
+                                <label class="form-label" for="email">Email</label>
+                                <input class="form-control" type="text" placeholder="business@email.com" id="email"
+                                    name="sett[email]" value="<%=sett.email%>" >
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="mb-3 col-sm-6">
+                                <label class="form-label" for="hours">Business Hours</label>
+                                <input class="form-control" type="text" placeholder="8-3 p.m. M-F" id="hours"
+                                    name="sett[hours]" value="<%=sett.hours%>" >
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="mb-3 col-sm-4">
+                                <label class="form-label" for="phoneLabel">Phone Label</label>
+                                <input class="form-control" type="text" placeholder="(801) 987-6543" id="phoneLabel"
+                                    name="sett[phoneLabel]" value="<%=sett.phoneLabel%>" >
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="mb-3 col-sm-8">
+                                <label class="form-label" for="phone">Phone Plain</label>
+                                <input class="form-control" type="text" placeholder="8019876543" id="phone"
+                                    name="sett[phone]" value="<%=sett.phone%>" >
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="mb-3 col-sm-4">
+                                <label class="form-label" for="socialIcon">Social Icon</label>
+                                <select class="form-select" id="socialIcon"
+                                    name="sett[socialIcon]" >
+                                    <option selected><%=sett.socialIcon%></option>
+                                    <option value="fab fa-facebook-f">Facebook</option>
+                                    <option value="fab fa-twitter">Twitter</option>
+                                    <option value="fab fa-instagram-square">Instagram</option>
+                                    <option value="fab fa-google">Google</option>
+                                    <option value="fab fa-snapchat">Snapchat</option>
+                                    <option value="fas fa-share-square">Other Social Network</option>
+                                </select>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="mb-3 col-sm-4">
+                                <label class="form-label" for="socialLabel">Social Label</label>
+                                <input class="form-control" type="text" placeholder="Facebook or facebook.com/..." id="socialLabel"
+                                    name="sett[socialLabel]" value="<%=sett.socialLabel%>" >
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="mb-3 col-sm-4">
+                                <label class="form-label" for="socialURL">Social URL</label>
+                                <input class="form-control" type="text" placeholder="https://www..." id="socialURL"
+                                    name="sett[socialURL]" value="<%=sett.socialURL%>" >
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="mb-3 col-sm-12">
+                                <label class="form-label" for="address">Address</label>
+                                <input class="form-control" type="text" placeholder="123 Fake St. New York, NY 99999" id="address"
+                                    name="sett[address]" value="<%=sett.address%>" >
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="mb-3 col-sm-6">
+                                <label class="form-label" for="payLabel">Payments Label</label>
+                                <input class="form-control" type="text" placeholder="Venmo or PayPal" id="payLabel"
+                                    name="sett[payLabel]" value="<%=sett.payLabel%>" >
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="mb-3 col-sm-6">
+                                <label class="form-label" for="payURL">Payments URL</label>
+                                <input class="form-control" type="text" placeholder="https://www..." id="payURL"
+                                    name="sett[payURL]" value="<%=sett.payURL%>" >
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <h2 class="mt-4 form-subtitle">Registration Form Button</h2>
+                            <hr>
+                            <p class="text-muted">This button is found on the register page.</p>
+                            <div class="mb-3 col-sm-4">
+                                <label class="form-label" for="registerFormLabel">Registration Form Label</label>
+                                <input class="form-control" type="text" placeholder="Label Name" id="registerFormLabel"
+                                    name="sett[registerFormLabel]" value="<%=sett.registerFormLabel%>" >
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="mb-3 col-sm-8">
+                                <label class="form-label" for="registerFormURL">Registration Form URL</label>
+                                <input class="form-control" type="text" placeholder="https://www..." id="registerFormURL"
+                                    name="sett[registerFormURL]" value="<%=sett.registerFormURL%>" >
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <h2 class="mt-4 form-subtitle">Course Information</h2>
+                            <hr>
+                            <p class="text-muted">This information displays on the Courses page.</p>
+                            <div class="mb-3 col-sm-6">
+                                <label class="form-label" for="courseIcon1">Course Icon</label>
+                                <select class="form-select" id="courseIcon1"
+                                    name="sett[courseIcon1]" >
+                                    <option selected><%=sett.courseIcon1%></option>
+                                    <!-- https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Errors/is_not_iterable -->
+                                    <% for(let course of Object.keys(courseIconList)) { %>
+                                        <option value="<%=courseIconList[course]%>">
+                                            <%=course%>
+                                        </option>
+                                        <% } %>
+                                </select>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="mb-3 col-sm-6">
+                                <label class="form-label" for="courseLabel1">Course Label</label>
+                                <input class="form-control" type="text" placeholder="Label Name" id="courseLabel1"
+                                    name="sett[courseLabel1]" value="<%=sett.courseLabel1%>" >
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="mb-3 col-sm-12">
+                                <label class="form-label" for="courseDesc1">Course Description</label>
+                                <textarea class="form-control" name="sett[courseDesc1]" id="courseDesc1" cols="30" rows="3"
+                                    placeholder="Students will learn... You can expect... Max of 2000 characters."><%=sett.courseDesc1%></textarea>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="mb-3 col-sm-6">
+                                <label class="form-label" for="courseIcon2">Course Icon</label>
+                                <select class="form-select" id="courseIcon2"
+                                    name="sett[courseIcon2]" >
+                                    <option selected><%=sett.courseIcon2%></option>
+                                    <!-- https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Errors/is_not_iterable -->
+                                    <% for(let course of Object.keys(courseIconList)) { %>
+                                        <option value="<%=courseIconList[course]%>">
+                                            <%=course%>
+                                        </option>
+                                        <% } %>
+                                </select>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="mb-3 col-sm-6">
+                                <label class="form-label" for="courseLabel2">Course Label</label>
+                                <input class="form-control" type="text" placeholder="Label Name" id="courseLabel2"
+                                    name="sett[courseLabel2]" value="<%=sett.courseLabel2%>" >
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="mb-3 col-sm-12">
+                                <label class="form-label" for="courseDesc2">Course Description</label>
+                                <textarea class="form-control" name="sett[courseDesc2]" id="courseDesc2" cols="30" rows="3"
+                                    placeholder="Students will learn... You can expect... Max of 2000 characters."><%=sett.courseDesc2%></textarea>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="mb-3 col-sm-6">
+                                <label class="form-label" for="courseIcon3">Course Icon</label>
+                                <select class="form-select" id="courseIcon3"
+                                    name="sett[courseIcon3]" >
+                                    <option selected><%=sett.courseIcon3%></option>
+                                    <!-- https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Errors/is_not_iterable -->
+                                    <% for(let course of Object.keys(courseIconList)) { %>
+                                        <option value="<%=courseIconList[course]%>">
+                                            <%=course%>
+                                        </option>
+                                        <% } %>
+                                </select>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="mb-3 col-sm-6">
+                                <label class="form-label" for="courseLabel3">Course Label</label>
+                                <input class="form-control" type="text" placeholder="Label Name" id="courseLabel3"
+                                    name="sett[courseLabel3]" value="<%=sett.courseLabel3%>" >
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="mb-3 col-sm-12">
+                                <label class="form-label" for="courseDesc3">Course Description</label>
+                                <textarea class="form-control" name="sett[courseDesc3]" id="courseDesc3" cols="30" rows="3"
+                                    placeholder="Students will learn... You can expect... Max of 2000 characters."><%=sett.courseDesc3%></textarea>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="mb-3 col-sm-6">
+                                <label class="form-label" for="courseIcon4">Course Icon</label>
+                                <select class="form-select" id="courseIcon4"
+                                    name="sett[courseIcon4]" >
+                                    <option selected><%=sett.courseIcon4%></option>
+                                    <!-- https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Errors/is_not_iterable -->
+                                    <% for(let course of Object.keys(courseIconList)) { %>
+                                        <option value="<%=courseIconList[course]%>">
+                                            <%=course%>
+                                        </option>
+                                        <% } %>
+                                </select>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="mb-3 col-sm-6">
+                                <label class="form-label" for="courseLabel4">Course Label</label>
+                                <input class="form-control" type="text" placeholder="Label Name" id="courseLabel4"
+                                    name="sett[courseLabel4]" value="<%=sett.courseLabel4%>" >
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="mb-3 col-sm-12">
+                                <label class="form-label" for="courseDesc4">Course Description</label>
+                                <textarea class="form-control" name="sett[courseDesc4]" id="courseDesc4" cols="30" rows="3"
+                                    placeholder="Students will learn... You can expect... Max of 2000 characters."><%=sett.courseDesc4%></textarea>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="mb-3 col-sm-6">
+                                <label class="form-label" for="courseIcon5">Course Icon</label>
+                                <select class="form-select" id="courseIcon5"
+                                    name="sett[courseIcon5]" >
+                                    <option selected><%=sett.courseIcon5%></option>
+                                    <!-- https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Errors/is_not_iterable -->
+                                    <% for(let course of Object.keys(courseIconList)) { %>
+                                        <option value="<%=courseIconList[course]%>">
+                                            <%=course%>
+                                        </option>
+                                        <% } %>
+                                </select>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="mb-3 col-sm-6">
+                                <label class="form-label" for="courseLabel5">Course Label</label>
+                                <input class="form-control" type="text" placeholder="Label Name" id="courseLabel5"
+                                    name="sett[courseLabel5]" value="<%=sett.courseLabel5%>" >
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="mb-3 col-sm-12">
+                                <label class="form-label" for="courseDesc5">Course Description</label>
+                                <textarea class="form-control" name="sett[courseDesc5]" id="courseDesc5" cols="30" rows="3"
+                                    placeholder="Students will learn... You can expect... Max of 2000 characters."><%=sett.courseDesc5%></textarea>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="mb-3 col-sm-6">
+                                <label class="form-label" for="courseIcon6">Course Icon</label>
+                                <select class="form-select" id="courseIcon6"
+                                    name="sett[courseIcon6]" >
+                                    <option selected><%=sett.courseIcon6%></option>
+                                    <!-- https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Errors/is_not_iterable -->
+                                    <% for(let course of Object.keys(courseIconList)) { %>
+                                        <option value="<%=courseIconList[course]%>">
+                                            <%=course%>
+                                        </option>
+                                        <% } %>
+                                </select>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="mb-3 col-sm-6">
+                                <label class="form-label" for="courseLabel6">Course Label</label>
+                                <input class="form-control" type="text" placeholder="Label Name" id="courseLabel6"
+                                    name="sett[courseLabel6]" value="<%=sett.courseLabel6%>" >
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="mb-3 col-sm-12">
+                                <label class="form-label" for="courseDesc6">Course Description</label>
+                                <textarea class="form-control" name="sett[courseDesc6]" id="courseDesc6" cols="30" rows="3"
+                                    placeholder="Students will learn... You can expect... Max of 2000 characters."><%=sett.courseDesc6%></textarea>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <h2 class="mt-4 form-subtitle">About Us</h2>
+                            <hr>
+                            <p class="text-muted">This information displays on the About Us page.</p>
+                            <div class="mb-3 col-sm-4">
+                                <label class="form-label" for="aboutLabel1">About Label 1</label>
+                                <input class="form-control" type="text" placeholder="Label Name" id="aboutLabel1"
+                                    name="sett[aboutLabel1]" value="<%=sett.aboutLabel1%>" >
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="mb-3 col-sm-12">
+                                <label class="form-label" for="aboutDesc1">About Description 1</label>
+                                <textarea class="form-control" name="sett[aboutDesc1]" id="aboutDesc1" cols="30" rows="3"
+                                    placeholder="This school was founded by ... in ... Max of 2000 characters."><%=sett.aboutDesc1%></textarea>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="mb-3 col-sm-4">
+                                <label class="form-label" for="aboutLabel2">About Label 2</label>
+                                <input class="form-control" type="text" placeholder="Label Name" id="aboutLabel2"
+                                    name="sett[aboutLabel2]" value="<%=sett.aboutLabel2%>" >
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="mb-3 col-sm-12">
+                                <label class="form-label" for="aboutDesc2">About Description 2</label>
+                                <textarea class="form-control" name="sett[aboutDesc2]" id="aboutDesc2" cols="30" rows="3"
+                                    placeholder="We focus on ... we are different in these ways ... Max of 2000 characters."><%=sett.aboutDesc2%></textarea>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 mb-3 mt-5 text-center">
+                            <button class="btn btn-lg btn-success"><i class="fas fa-check"></i> Update Site Settings</button>
+                        </div>
+                    </form>
+                    <p class="text-center"><a href="/setts/<%=sett._id%>" class="mb-3 btn btn-lg btn-danger"><i class="fas fa-times"></i> Cancel</a></p>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- Inspired by https://mdbootstrap.com/docs/standard/navigation/footer/ -->
+    <footer class="footer mt-auto bg-dark text-center text-lg-start">
+        <div class="container p-2">
+            <div class="row text-light">
+                    <% if(settings !==null) { %>
+                        <div class=" mb-4 mb-lg-0 col-lg-2">
+                            <h5>QUICK LINKS</h5>
+                            <ul class="list-unstyled mb-0">
+                                <li>
+                                    <a href="<%=settings.QL1URL%>" target="_blank" class="text-decoration-none footer-link"><%=settings.QL1Label%></a>
+                                </li>
+                                <li>
+                                    <a href="<%=settings.QL2URL%>" target="_blank" class="text-decoration-none footer-link"><%=settings.QL2Label%></a>
+                                </li>
+                                <li>
+                                    <a href="<%=settings.QL3URL%>" target="_blank" class="text-decoration-none footer-link"><%=settings.QL3Label%></a>
+                                </li>
+                                <li>
+                                    <a href="<%=settings.QL4URL%>" target="_blank" class="text-decoration-none footer-link"><%=settings.QL4Label%></a>
+                                </li>
+                                <li>
+                                    <a href="/" target="_blank" class="text-decoration-none footer-link">Home</a>
+                                </li>
+                                <li>
+                                    <a href="/aboutus" target="_blank" class="text-decoration-none footer-link">About Us</a>
+                                </li>
+                                <li>
+                                    <a href="/disclaimer" target="_blank"
+                                        class="text-decoration-none footer-link">Disclaimer</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class=" mb-4 mb-lg-0 col-lg-5">
+                            <h5>CONTACT</h5>
+                            <ul class="list-unstyled mb-0">
+                                <% if(settings.email) { %> 
+                                <li>
+                                    <a href="mailto:<%=settings.email%>"
+                                        class="text-decoration-none footer-link"><i class="fas fa-envelope"></i>
+                                        <%=settings.email%></a>
+                                </li>
+                                <% } %> 
+                                <% if(settings.phone && settings.phoneLabel) { %> 
+                                <li>
+                                    <a href="tel:<%=settings.phone%>" class="text-decoration-none footer-link"><i
+                                            class="fas fa-phone-alt"></i> <%=settings.phoneLabel%></a>
+                                </li>
+                                <% } %> 
+                                <% if(settings.hours) { %> 
+                                <li>
+                                    <a class="text-decoration-none footer-link"><i class="fas fa-clock"></i> <%=settings.hours%></a>
+                                </li>
+                                <% } %> 
+                                <% if(settings.address) { %> 
+                                <li>
+                                    <a href="https://maps.google.com/?q=<%=settings.address%>"
+                                        target="_blank" class="text-decoration-none footer-link"><i
+                                            class="fas fa-map-marker-alt"></i> <%=settings.address%></a>
+                                </li>
+                                <% } %> 
+                                <% if(settings.socialURL && settings.socialIcon && settings.socialLabel) { %> 
+                                <li>
+                                    <a href="<%=settings.socialURL%>" target="_blank"
+                                        class="text-decoration-none footer-link"><i class="<%=settings.socialIcon%>"></i>
+                                        <%=settings.socialLabel%></a>
+                                </li>
+                                <% } %> 
+                                <% if(settings.payURL && settings.payLabel) { %> 
+                                <li>
+                                    <a href="<%=settings.payURL%>" target="_blank" class="text-decoration-none footer-link"><i
+                                            class="fas fa-dollar-sign"></i> <%=settings.payLabel%></a>
+                                </li>
+                                <% } %> 
+                            </ul>
+                        </div>
+                        <div class=" mb-4 mb-lg-0 col-lg-5">
+                            <h5>TEACHER LINKS</h5>
+                            <ul class="list-unstyled mb-0">
+                                <li>
+                                    <a href="<%=settings.TL1URL%>" target="_blank" class="text-decoration-none footer-link"><%=settings.TL1Label%></a>
+                                </li>
+                                <li>
+                                    <a href="<%=settings.TL2URL%>" target="_blank" class="text-decoration-none footer-link"><%=settings.TL2Label%></a>
+                                </li>
+                                <li>
+                                    <a href="<%=settings.TL3URL%>" target="_blank" class="text-decoration-none footer-link"><%=settings.TL3Label%></a>
+                                </li>
+                                <li>
+                                    <a href="<%=settings.TL4URL%>" target="_blank" class="text-decoration-none footer-link"><%=settings.TL4Label%></a>
+                                </li>
+                            </ul>
+                        </div>
+                        <% } else { %>
+                            <p>Please configure the Site Settings in the Teacher Portal.</p>
+                            <% } %>
+            </div>
+        </div>
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
+            <span class="text-light">&copy 2021 LibertyLaunchGroup</span>
+        </div>
+    </footer>
+    <script src="/scripts/popper.min.js"></script>
+    <script src="/scripts/bootstrap.min.js"></script>
+    <script src="/scripts/validateForms.js"></script>
+</body>
+
+</html>

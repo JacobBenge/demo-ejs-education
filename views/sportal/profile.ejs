@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile | Demo EJS Education</title>
+
+    <link href="/styles/bootstrap.min.css" rel="stylesheet">
+    <link href="/styles/default.css" rel="stylesheet">
+    <link rel="stylesheet" href="/styles/all.min.css">
+</head>
+
+<body class="d-flex flex-column vh-100">
+    <%- include('../partials/student-navbar') %>
+    <main class="container mt-5">
+        <%- include('../partials/flash.ejs') %>
+        <div class="row">
+            <div class="card shadow mb-5">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-2 mt-2">
+                            <a href="/sportal/" class="btn btn-dark font-weight-bold mb-1"><i
+                                    class="fas fa-chevron-left"></i></a>
+                        </div>
+                        <h1 class="text-center mt-4 col-8">
+                            My Profile
+                        </h1>
+                        <div class="col-2 mt-4">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <h2 class="mt-4 form-subtitle">Personal Info</h2>
+                            <hr>
+                            <dl class="row">
+                                <dt class="col-sm-4">Registration Code:</dt>
+                                <dd class="col-sm-8">
+                                    <%=student._id%>
+                                </dd>
+                                <dt class="col-sm-4">First Name:</dt>
+                                <dd class="col-sm-8">
+                                    <%=student.firstName%>
+                                </dd>
+                                <dt class="col-sm-4">Last Name:</dt>
+                                <dd class="col-sm-8">
+                                    <%=student.lastName%>
+                                </dd>
+                                <dt class="col-sm-4">Preferred Name:</dt>
+                                <dd class="col-sm-8">
+                                    <%=student.prefName%>
+                                </dd>
+                                <dt class="col-sm-4">Birth Date:</dt>
+                                <dd class="col-sm-8">
+                                    <%=student.dateOfBirth.toISOString().substring(0, 10)%>
+                                </dd>
+                                <dt class="col-sm-4">Gender:</dt>
+                                <dd class="col-sm-8">
+                                    <%=student.gender%>
+                                </dd>
+                                <dt class="col-sm-4">School Year:</dt>
+                                <dd class="col-sm-8">
+                                    <%=student.schoolYear%>
+                                </dd>
+                                <dt class="col-sm-4">Address Line 1:</dt>
+                                <dd class="col-sm-8">
+                                    <%=student.addressLine1%>
+                                </dd>
+                                <dt class="col-sm-4">Address Line 2:</dt>
+                                <dd class="col-sm-8">
+                                    <%=student.addressLine2%>
+                                </dd>
+                                <dt class="col-sm-4">City:</dt>
+                                <dd class="col-sm-8">
+                                    <%=student.city%>
+                                </dd>
+                                <dt class="col-sm-4">State:</dt>
+                                <dd class="col-sm-8">
+                                    <%=student.stateCode%>
+                                </dd>
+                                <dt class="col-sm-4">Zip Code:</dt>
+                                <dd class="col-sm-8">
+                                    <%=student.zipCodeBase%>
+                                        <!-- show or hide a dash depending if extension is present -->
+                                        <% if(student.zipCodeExtension) { %>
+                                            <span>-</span>
+                                            <% } %>
+                                                <%=student.zipCodeExtension%>
+                                </dd>
+                                <dt class="col-sm-4">Special Notes:</dt>
+                                <dd class="col-sm-8">
+                                    <%=student.notes%>
+                                </dd>
+                            </dl>
+                        </div>
+                        <div class="col-sm-6">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <h2 class="mt-4 form-subtitle">Contacts</h2>
+                        <hr>
+                        <dl class="row">
+                            <div class="col-sm-4">
+                                <h4>Primary</h4>
+                                <dt class="col-sm-4">First Name:</dt>
+                                <dd class="col-sm-8">
+                                    <%=student.primaryContactFirst%>
+                                </dd>
+                                <dt class="col-sm-4">Last Name:</dt>
+                                <dd class="col-sm-8">
+                                    <%=student.primaryContactLast%>
+                                </dd>
+                                <dt class="col-sm-4">Phone:</dt>
+                                <dd class="col-sm-8">
+                                    <%=student.primaryContactPhone%>
+                                </dd>
+                                <dt class="col-sm-4">Email:</dt>
+                                <dd class="col-sm-8">
+                                    <%=student.primaryContactEmail%>
+                                </dd>
+                                <dt class="col-sm-4">Relationship:</dt>
+                                <dd class="col-sm-8">
+                                    <%=student.primaryContactRelationship%>
+                                </dd>
+                            </div>
+                            <div class="col-sm-4">
+                                <h4>Emergency 1</h4>
+                                <dt class="col-sm-4">First Name:</dt>
+                                <dd class="col-sm-8">
+                                    <%=student.emergPrimFirst%>
+                                </dd>
+                                <dt class="col-sm-4">Last Name:</dt>
+                                <dd class="col-sm-8">
+                                    <%=student.emergPrimLast%>
+                                </dd>
+                                <dt class="col-sm-4">Phone:</dt>
+                                <dd class="col-sm-8">
+                                    <%=student.emergPrimPhone%>
+                                </dd>
+                                <dt class="col-sm-4">Email:</dt>
+                                <dd class="col-sm-8">
+                                    <%=student.emergPrimEmail%>
+                                </dd>
+                                <dt class="col-sm-4">Relationship:</dt>
+                                <dd class="col-sm-8">
+                                    <%=student.emergPrimRelationship%>
+                                </dd>
+                            </div>
+                            <div class="col-sm-4">
+                                <h4>Emergency 2</h4>
+                                <dt class="col-sm-4">First Name:</dt>
+                                <dd class="col-sm-8">
+                                    <%=student.emergSecFirst%>
+                                </dd>
+                                <dt class="col-sm-4">Last Name:</dt>
+                                <dd class="col-sm-8">
+                                    <%=student.emergSecLast%>
+                                </dd>
+                                <dt class="col-sm-4">Phone:</dt>
+                                <dd class="col-sm-8">
+                                    <%=student.emergSecPhone%>
+                                </dd>
+                                <dt class="col-sm-4">Email:</dt>
+                                <dd class="col-sm-8">
+                                    <%=student.emergSecEmail%>
+                                </dd>
+                                <dt class="col-sm-4">Relationship:</dt>
+                                <dd class="col-sm-8">
+                                    <%=student.emergSecRelationship%>
+                                </dd>
+                            </div>
+                        </dl>
+                        <p class="text-muted mb-0"><small>Created By: <%=student.createdBy%> on
+                            <%=student.createDate.toISOString().substring(0, 10)%> </small></p>
+                <% if(student.lastModifiedBy) { %>
+                    <p class="text-muted mb-0"><small>Last Modified By: <%=student.lastModifiedBy%> on
+                                <%=student.lastModifiedDate.toISOString().substring(0, 10)%> </small></p>
+                    <% } %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- Inspired by https://mdbootstrap.com/docs/standard/navigation/footer/ -->
+    <footer class="footer mt-auto bg-dark text-center text-lg-start">
+    <div class="container p-2">
+        <div class="row text-light">
+                <% if(settings !==null) { %>
+                    <div class=" mb-4 mb-lg-0 col-lg-2">
+                        <h5>QUICK LINKS</h5>
+                        <ul class="list-unstyled mb-0">
+                            <li>
+                                <a href="<%=settings.QL1URL%>" target="_blank" class="text-decoration-none footer-link"><%=settings.QL1Label%></a>
+                            </li>
+                            <li>
+                                <a href="<%=settings.QL2URL%>" target="_blank" class="text-decoration-none footer-link"><%=settings.QL2Label%></a>
+                            </li>
+                            <li>
+                                <a href="<%=settings.QL3URL%>" target="_blank" class="text-decoration-none footer-link"><%=settings.QL3Label%></a>
+                            </li>
+                            <li>
+                                <a href="<%=settings.QL4URL%>" target="_blank" class="text-decoration-none footer-link"><%=settings.QL4Label%></a>
+                            </li>
+                            <li>
+                                <a href="/" target="_blank" class="text-decoration-none footer-link">Home</a>
+                            </li>
+                            <li>
+                                <a href="/aboutus" target="_blank" class="text-decoration-none footer-link">About Us</a>
+                            </li>
+                            <li>
+                                <a href="/disclaimer" target="_blank"
+                                    class="text-decoration-none footer-link">Disclaimer</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class=" mb-4 mb-lg-0 col-lg-5">
+                        <h5>CONTACT</h5>
+                        <ul class="list-unstyled mb-0">
+                            <% if(settings.email) { %> 
+                            <li>
+                                <a href="mailto:<%=settings.email%>"
+                                    class="text-decoration-none footer-link"><i class="fas fa-envelope"></i>
+                                    <%=settings.email%></a>
+                            </li>
+                            <% } %> 
+                            <% if(settings.phone && settings.phoneLabel) { %> 
+                            <li>
+                                <a href="tel:<%=settings.phone%>" class="text-decoration-none footer-link"><i
+                                        class="fas fa-phone-alt"></i> <%=settings.phoneLabel%></a>
+                            </li>
+                            <% } %> 
+                            <% if(settings.hours) { %> 
+                            <li>
+                                <a class="text-decoration-none footer-link"><i class="fas fa-clock"></i> <%=settings.hours%></a>
+                            </li>
+                            <% } %> 
+                            <% if(settings.address) { %> 
+                            <li>
+                                <a href="https://maps.google.com/?q=<%=settings.address%>"
+                                    target="_blank" class="text-decoration-none footer-link"><i
+                                        class="fas fa-map-marker-alt"></i> <%=settings.address%></a>
+                            </li>
+                            <% } %> 
+                            <% if(settings.socialURL && settings.socialIcon && settings.socialLabel) { %> 
+                            <li>
+                                <a href="<%=settings.socialURL%>" target="_blank"
+                                    class="text-decoration-none footer-link"><i class="<%=settings.socialIcon%>"></i>
+                                    <%=settings.socialLabel%></a>
+                            </li>
+                            <% } %> 
+                            <% if(settings.payURL && settings.payLabel) { %> 
+                            <li>
+                                <a href="<%=settings.payURL%>" target="_blank" class="text-decoration-none footer-link"><i
+                                        class="fas fa-dollar-sign"></i> <%=settings.payLabel%></a>
+                            </li>
+                            <% } %> 
+                        </ul>
+                    </div>
+                    <% } else { %>
+                        <p>Please configure the Site Settings in the Teacher Portal.</p>
+                        <% } %>
+        </div>
+    </div>
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
+        <span class="text-light">&copy 2021 LibertyLaunchGroup</span>
+    </div>
+    </footer>
+    <script src="/scripts/popper.min.js"></script>
+    <script src="/scripts/bootstrap.min.js"></script>
+    <script src="/scripts/validateForms.js"></script>
+</body>
+
+</html>

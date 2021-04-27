@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | Demo EJS Education</title>
+    <link href="/styles/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/styles/home.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="/styles/all.min.css">
+    <!--Page styling inspired by https://getbootstrap.com/docs/4.0/examples/cover/  -->
+</head>
+
+<body class="d-flex text-center text-white bg-dark">
+    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+        <header class="mb-auto">
+            <div>
+                <h3 class="float-md-start mb-0">Demo EJS Education</h3>
+                <nav class="nav nav-masthead justify-content-center float-md-end">
+                    <a class="nav-link" href="/"><i class="fas fa-home"></i> Home</a>
+                    <a class="nav-link" href="/courses">Courses</a>
+                    <a class="nav-link" href="/aboutus">About Us</a>
+                    <a class="nav-link active" aria-current="page" href="/contact">Contact Us</a>
+                    <span class="nav-link"> | </span>
+                    <% if(!currentUser) { %>
+                        <a class="nav-link" href="/login">Login</a>
+                        <a class="nav-link" href="/register">Register</a>
+                        <% } else if(currentUser.isAdmin==true) { %>
+                            <a class="nav-link" href="/tportal">Teacher Portal</a>
+                            <a class="nav-link" href="/logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                            <% } else if(currentUser.isAdmin==false) { %>
+                                <a class="nav-link" href="/sportal">Student Portal</a>
+                                <a class="nav-link" href="/logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                            <% } else { %>
+                                <a class="nav-link" href="/logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                                <% } %>
+                </nav>
+            </div>
+        </header>
+        <main class="px-3">
+            <div class="row">
+                <h1 class="mb-4"><strong>Contact Us</strong></h1>
+                <% if(settings !== null) { %> 
+                <div class="col-xl-2"></div>
+                <div class="col-xl-4 col-lg-12 text-start">
+                    <% if(settings.email) { %> 
+                    <p class="lead"> <a href="mailto:<%=settings.email%> " class="text-decoration-none text-light"><i class="fas fa-envelope"></i> <%=settings.email%></a></p>
+                    <% } %> 
+                    <% if(settings.phone && settings.phoneLabel) { %> 
+                    <p class="lead"><a href="tel:<%=settings.phone%> " class="text-decoration-none text-light"><i class="fas fa-phone-alt"></i> <%=settings.phoneLabel%></a></p>
+                    <% } %> 
+                    <% if(settings.socialURL && settings.socialIcon && settings.socialLabel) { %> 
+                    <p class="lead"><a href="<%=settings.socialURL%> " target="_blank" class="text-decoration-none text-light"><i class="<%=settings.socialIcon%>"></i> <%=settings.socialLabel%></a></p>
+                    <% } %> 
+                </div>
+                <div class="col-xl-4 col-lg-12 text-start">
+                    <% if(settings.hours) { %> 
+                    <p class="lead"><i class="fas fa-clock"></i> <%=settings.hours%></p>
+                    <% } %> 
+                    <% if(settings.address) { %> 
+                    <p class="lead"><a href="https://maps.google.com/?q=<%=settings.address%> " target="_blank" class="text-decoration-none text-light"><i class="fas fa-map-marker-alt"></i> <%=settings.address%></a></p>
+                    <% } %> 
+                </div>
+                <div class="col-xl-2"></div>
+                <% } else { %>
+                    <p>Please configure the Site Settings in the Teacher Portal.</p>
+                    <% } %>  
+            </div>
+        </main>
+        <footer class="mt-auto text-white-50">
+            <%- include('./partials/flash.ejs') %>
+                <p>&copy; 2021 LibertyLaunchGroup</p>
+        </footer>
+    </div>
+    <script src="/scripts/popper.min.js"></script>
+    <script src="/scripts/bootstrap.min.js"></script>
+</body>
+
+</html>

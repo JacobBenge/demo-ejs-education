@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Student | Demo EJS Education</title>
+    <link href="/styles/bootstrap.min.css" rel="stylesheet">
+    <link href="/styles/default.css" rel="stylesheet">
+    <link rel="stylesheet" href="/styles/all.min.css">
+</head>
+
+<body class="d-flex flex-column vh-100">
+    <%- include('../partials/teacher-navbar') %>
+    <main class="container mt-5">
+        <%- include('../partials/flash.ejs') %>
+        <div class="row">
+            <div class="card shadow mb-5">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-2 mt-2">
+                            <a href="/students/<%=student._id%>" class="btn btn-dark font-weight-bold mb-1"><i class="fas fa-chevron-left"></i></a>
+                        </div>
+                        <h1 class="col-8 text-center mt-4">Update Student</h1>
+                        <div class="col-2"></div>
+                    </div>
+                    <form action="/students/<%=student._id%>?_method=PUT" method="POST" novalidate class="validated-form">
+                        <div class="row">
+                            <h2 class="mt-4 form-subtitle">Personal Info</h2>
+                            <hr>
+                            <p class="text-muted">Fields marked with * are required.</p>
+                            <div class="mb-3 col-sm-6 col-md-4">
+                                <label class="form-label" for="firstName">*First Name</label>
+                                <input class="form-control" type="text" placeholder="First" value="<%=student.firstName%>"
+                                    id="firstName" name="student[firstName]" required autofocus>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="mb-3 col-sm-6 col-md-4">
+                                <label class="form-label" for="lastName">*Last Name</label>
+                                <input class="form-control" type="text" placeholder="Last" value="<%=student.lastName%>"
+                                    id="lastName" name="student[lastName]" required>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="mb-3 col-sm-6 col-md-4">
+                                <label class="form-label" for="prefName">Preferred Name</label>
+                                <input class="form-control" type="text" placeholder="Nickname"
+                                    value="<%=student.prefName%>" id="prefName" name="student[prefName]">
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="mb-3 col-sm-6 col-md-4">
+                                <label class="form-label" for="dateOfBirth">*Birth Date:</label>
+                                <input class="form-control" type="date"
+                                    value="<%=student.dateOfBirth.toISOString().substring(0, 10)%>" id="dateOfBirth"
+                                    name="student[dateOfBirth]">
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="mb-3 col-sm-6 col-md-4">
+                                <label class="form-label" for="gender">*Gender</label>
+                                <select class="form-select" aria-label="Default select example" id="gender"
+                                    name="student[gender]" required>
+                                    <option selected>
+                                        <%=student.gender%>
+                                    </option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                    <option value="Unknown">Unknown</option>
+                                </select>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-4">
+                                <div class="mb-3">
+                                    <label class="form-label" for="schoolYear">Year in School</label>
+                                    <input class="form-control" type="number" value="<%=student.schoolYear%>"
+                                        placeholder="Year" id="schoolYear" name="student[schoolYear]">
+                                    <div class="valid-feedback">
+                                        Looks good!
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3 col-sm-6 col-md-6">
+                                <label class="form-label" for="addressLine1">*Address Line 1</label>
+                                <input class="form-control" type="text" value="<%=student.addressLine1%>"
+                                    placeholder="123 Main St." id="addressLine1" name="student[addressLine1]" required>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="mb-3 col-sm-6 col-md-6">
+                                <label class="form-label" for="addressLine2">Address Line 2</label>
+                                <input class="form-control" type="text" value="<%=student.addressLine2%>"
+                                    placeholder="Apartment" id="addressLine2" name="student[addressLine2]">
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="mb-3 col-sm-6 col-md-3">
+                                <label class="form-label" for="city">*City</label>
+                                <input class="form-control" type="text" value="<%=student.city%>" placeholder="City"
+                                    id="city" name="student[city]" required>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="mb-3 col-sm-6 col-md-3">
+                                <label class="form-label" for="stateCode">*State Code</label>
+                                <select class="form-select" id="stateCode" name="student[stateCode]" required>
+                                    <option selected>
+                                        <%=student.stateCode%>
+                                    </option>
+                                    <% for(let state of stateList) { %>
+                                        <option value="<%=state%>">
+                                            <%=state%>
+                                        </option>
+                                        <% } %>
+                                </select>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="mb-3 col-sm-6 col-md-3">
+                                <label class="form-label" for="zipCodeBase">*Zip Code</label>
+                                <input class="form-control" type="text" value="<%=student.zipCodeBase%>" placeholder="84999"
+                                    id="zipCodeBase" name="student[zipCodeBase]" required>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="mb-3 col-sm-6 col-md-3">
+                                <label class="form-label" for="zipCodeExtension">Zip Code Ext.</label>
+                                <input class="form-control" type="text" value="<%=student.zipCodeExtension%>"
+                                    placeholder="0000" id="zipCodeExtension" name="student[zipCodeExtension]">
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="notes">Special Notes</label>
+                                <textarea class="form-control" type="text" rows="4"
+                                    placeholder="Allergies, medications, disabilities, etc. Max of 1000 characters." id="notes"
+                                    name="student[notes]"><%=student.notes%> </textarea>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <h2 class="mt-4 form-subtitle">Student Portal Info</h2>
+                            <hr>
+                            <div class="col-4"></div>
+                            <!--Used for centering Coins Balance-->
+                            <div class="mb-3 col-sm-4 text-center">
+                                <label class="form-label" for="coinsBalance">Reward Coins Balance</label>
+                                <input class="form-control" type="number" value="<%=student.coinsBalance%>" placeholder="(ex.) 100" id="coinsBalance"
+                                    name="student[coinsBalance]">
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="col-4"></div>
+                            <!--Used for centering Coins Balance-->
+                            <div class="mb-3 col-sm-6 col-md-3">
+                                <label class="form-label" for="url1Label">Label for Link 1</label>
+                                <input class="form-control" type="text" value="<%=student.url1Label%>" placeholder="Language Arts" id="url1Label"
+                                    name="student[url1Label]">
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="mb-3 col-sm-6 col-md-9">
+                                <label class="form-label" for="url1">Link 1</label>
+                                <input class="form-control" type="text" value="<%=student.url1%>" placeholder="https://www.freckle.com/" id="url1"
+                                    name="student[url1]">
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="mb-3 col-sm-6 col-md-3">
+                                <label class="form-label" for="url2Label">Label for Link 2</label>
+                                <input class="form-control" type="text" value="<%=student.url2Label%>"placeholder="Math" id="url2Label"
+                                    name="student[url2Label]">
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="mb-3 col-sm-6 col-md-9">
+                                <label class="form-label" for="url2">Link 2</label>
+                                <input class="form-control" type="text" value="<%=student.url2%>" placeholder="https://www.khanacademy.org/" id="url2"
+                                    name="student[url2]">
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="mb-3 col-sm-6 col-md-3">
+                                <label class="form-label" for="url3Label">Label for Link 3</label>
+                                <input class="form-control" type="text" value="<%=student.url3Label%>" placeholder="Spanish" id="url3Label"
+                                    name="student[url3Label]">
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="mb-3 col-sm-6 col-md-9">
+                                <label class="form-label" for="url3">Link 3</label>
+                                <input class="form-control" type="text" value="<%=student.url3%>" placeholder="https://www.duolingo.com/" id="url3"
+                                    name="student[url3]">
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="mb-3 col-sm-6 col-md-3">
+                                <label class="form-label" for="url4Label">Label for Link 4</label>
+                                <input class="form-control" type="text" value="<%=student.url4Label%>" placeholder="Coding" id="url4Label"
+                                    name="student[url4Label]">
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="mb-3 col-sm-6 col-md-9">
+                                <label class="form-label" for="url4">Link 4</label>
+                                <input class="form-control" type="text" value="<%=student.url4%>" placeholder="https://www.codecademy.com/" id="url4"
+                                    name="student[url4]">
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <h2 class="mt-4 form-subtitle">Primary Contact</h2>
+                            <hr>
+                            <div class="mb-3 col-sm-6">
+                                <label class="form-label" for="primaryContactFirst">*First Name</label>
+                                <input class="form-control" type="text" value="<%=student.primaryContactFirst%>" placeholder="First" id="primaryContactFirst"
+                                    name="student[primaryContactFirst]" required>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="mb-3 col-sm-6">
+                                <label class="form-label" for="primaryContactLast">*Last Name</label>
+                                <input class="form-control" type="text" value="<%=student.primaryContactLast%>" placeholder="Last" id="primaryContactLast"
+                                    name="student[primaryContactLast]" required>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="mb-3 col-sm-6 col-md-4">
+                                <label class="form-label" for="primaryContactPhone">*Phone</label>
+                                <input class="form-control" type="text" value="<%=student.primaryContactPhone%>" placeholder="8011234567" id="primaryContactPhone"
+                                    name="student[primaryContactPhone]" required>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="mb-3 col-sm-6 col-md-4">
+                                <label class="form-label" for="primaryContactEmail">*Email</label>
+                                <input class="form-control" type="text" value="<%=student.primaryContactEmail%>"  placeholder="primaryContact@gmail.com"
+                                    id="primaryContactEmail" name="student[primaryContactEmail]" required>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="mb-3 col-sm-6 col-md-4">
+                                <label class="form-label" for="primaryContactRelationship">*Relationship to
+                                    Student</label>
+                                <select class="form-select" id="primaryContactRelationship"
+                                    name="student[primaryContactRelationship]" required>
+                                    <option selected><%=student.primaryContactRelationship%> </option>
+                                    <% for(let relationshipType of relationshipTypes) { %>
+                                        <option value="<%=relationshipType%>">
+                                            <%=relationshipType%>
+                                        </option>
+                                        <% } %>
+                                </select>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <h2 class="mt-4 form-subtitle">Emergency Contacts</h2>
+                            <hr>
+                            <h4>Primary</h4>
+                            <div class="mb-3 col-sm-6">
+                                <label class="form-label" for="emergPrimFirst">*First Name</label>
+                                <input class="form-control" type="text" value="<%=student.emergPrimFirst%>" placeholder="First" id="emergPrimFirst"
+                                    name="student[emergPrimFirst]" required>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="mb-3 col-sm-6">
+                                <label class="form-label" for="emergPrimLast">*Last Name</label>
+                                <input class="form-control" type="text" value="<%=student.emergPrimLast%>" placeholder="Last" id="emergPrimLast"
+                                    name="student[emergPrimLast]" required>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="mb-3 col-sm-6 col-md-4">
+                                <label class="form-label" for="emergPrimPhone">*Phone</label>
+                                <input class="form-control" type="text" value="<%=student.emergPrimPhone%>" placeholder="8011234567" id="emergPrimPhone"
+                                    name="student[emergPrimPhone]" required>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="mb-3 col-sm-6 col-md-4">
+                                <label class="form-label" for="emergPrimEmail">*Email</label>
+                                <input class="form-control" type="text" value="<%=student.emergPrimEmail%>"  placeholder="emergprimary@gmail.com"
+                                    id="emergPrimEmail" name="student[emergPrimEmail]" required>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="mb-3 col-sm-6 col-md-4">
+                                <label class="form-label" for="emergPrimRelationship">*Relationship to
+                                    Student</label>
+                                <select class="form-select" id="emergPrimRelationship"
+                                    name="student[emergPrimRelationship]" required>
+                                    <option selected><%=student.emergPrimRelationship%> </option>
+                                    <% for(let relationshipType of relationshipTypes) { %>
+                                        <option value="<%=relationshipType%>">
+                                            <%=relationshipType%>
+                                        </option>
+                                        <% } %>
+                                </select>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <h4>Secondary</h4>
+                            <div class="mb-3 col-sm-6">
+                                <label class="form-label" for="emergSecFirst">First Name</label>
+                                <input class="form-control" type="text" value="<%=student.emergSecFirst%>" placeholder="First" id="emergSecFirst"
+                                    name="student[emergSecFirst]">
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="mb-3 col-sm-6">
+                                <label class="form-label" for="emergSecLast">Last Name</label>
+                                <input class="form-control" type="text" value="<%=student.emergSecLast%>" placeholder="Last" id="emergSecLast"
+                                    name="student[emergSecLast]">
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="mb-3 col-sm-6 col-md-4">
+                                <label class="form-label" for="emergSecPhone">Phone</label>
+                                <input class="form-control" type="text" value="<%=student.emergSecPhone%>" placeholder="8011234567"
+                                    id="emergSecPhone" name="student[emergSecPhone]">
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="mb-3 col-sm-6 col-md-4">
+                                <label class="form-label" for="emergSecEmail">Email</label>
+                                <input class="form-control" type="text" value="<%=student.emergSecEmail%>" placeholder="emergsecondary@gmail.com"
+                                    id="semergSecEmail" name="student[emergSecEmail]">
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="mb-3 col-sm-6 col-md-4">
+                                <label class="form-label" for="emergSecRelationship">Relationship to
+                                    Student</label>
+                                <select class="form-select" id="emergSecRelationship"
+                                    name="student[emergSecRelationship]">
+                                    <option selected><%=student.emergSecRelationship%> </option>
+                                    <% for(let relationshipType of relationshipTypes) { %>
+                                        <option value="<%=relationshipType%>">
+                                            <%=relationshipType%>
+                                        </option>
+                                        <% } %>
+                                </select>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 mb-3 mt-5 text-center">
+                            <button class="btn btn-lg btn-success"><i class="fas fa-user-edit"></i> Update Student</button>
+                        </div>
+                    </form>
+                    <p class="text-center"><a href="/students/<%=student._id%>" class="mb-3 btn btn-lg btn-danger"><i class="fas fa-times"></i> Cancel</a></p>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- Inspired by https://mdbootstrap.com/docs/standard/navigation/footer/ -->
+    <footer class="footer mt-auto bg-dark text-center text-lg-start">
+        <div class="container p-2">
+            <div class="row text-light">
+                    <% if(settings !==null) { %>
+                        <div class=" mb-4 mb-lg-0 col-lg-2">
+                            <h5>QUICK LINKS</h5>
+                            <ul class="list-unstyled mb-0">
+                                <li>
+                                    <a href="<%=settings.QL1URL%>" target="_blank" class="text-decoration-none footer-link"><%=settings.QL1Label%></a>
+                                </li>
+                                <li>
+                                    <a href="<%=settings.QL2URL%>" target="_blank" class="text-decoration-none footer-link"><%=settings.QL2Label%></a>
+                                </li>
+                                <li>
+                                    <a href="<%=settings.QL3URL%>" target="_blank" class="text-decoration-none footer-link"><%=settings.QL3Label%></a>
+                                </li>
+                                <li>
+                                    <a href="<%=settings.QL4URL%>" target="_blank" class="text-decoration-none footer-link"><%=settings.QL4Label%></a>
+                                </li>
+                                <li>
+                                    <a href="/" target="_blank" class="text-decoration-none footer-link">Home</a>
+                                </li>
+                                <li>
+                                    <a href="/aboutus" target="_blank" class="text-decoration-none footer-link">About Us</a>
+                                </li>
+                                <li>
+                                    <a href="/disclaimer" target="_blank"
+                                        class="text-decoration-none footer-link">Disclaimer</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class=" mb-4 mb-lg-0 col-lg-5">
+                            <h5>CONTACT</h5>
+                            <ul class="list-unstyled mb-0">
+                                <% if(settings.email) { %> 
+                                <li>
+                                    <a href="mailto:<%=settings.email%>"
+                                        class="text-decoration-none footer-link"><i class="fas fa-envelope"></i>
+                                        <%=settings.email%></a>
+                                </li>
+                                <% } %> 
+                                <% if(settings.phone && settings.phoneLabel) { %> 
+                                <li>
+                                    <a href="tel:<%=settings.phone%>" class="text-decoration-none footer-link"><i
+                                            class="fas fa-phone-alt"></i> <%=settings.phoneLabel%></a>
+                                </li>
+                                <% } %> 
+                                <% if(settings.hours) { %> 
+                                <li>
+                                    <a class="text-decoration-none footer-link"><i class="fas fa-clock"></i> <%=settings.hours%></a>
+                                </li>
+                                <% } %> 
+                                <% if(settings.address) { %> 
+                                <li>
+                                    <a href="https://maps.google.com/?q=<%=settings.address%>"
+                                        target="_blank" class="text-decoration-none footer-link"><i
+                                            class="fas fa-map-marker-alt"></i> <%=settings.address%></a>
+                                </li>
+                                <% } %> 
+                                <% if(settings.socialURL && settings.socialIcon && settings.socialLabel) { %> 
+                                <li>
+                                    <a href="<%=settings.socialURL%>" target="_blank"
+                                        class="text-decoration-none footer-link"><i class="<%=settings.socialIcon%>"></i>
+                                        <%=settings.socialLabel%></a>
+                                </li>
+                                <% } %> 
+                                <% if(settings.payURL && settings.payLabel) { %> 
+                                <li>
+                                    <a href="<%=settings.payURL%>" target="_blank" class="text-decoration-none footer-link"><i
+                                            class="fas fa-dollar-sign"></i> <%=settings.payLabel%></a>
+                                </li>
+                                <% } %> 
+                            </ul>
+                        </div>
+                        <div class=" mb-4 mb-lg-0 col-lg-5">
+                            <h5>TEACHER LINKS</h5>
+                            <ul class="list-unstyled mb-0">
+                                <li>
+                                    <a href="<%=settings.TL1URL%>" target="_blank" class="text-decoration-none footer-link"><%=settings.TL1Label%></a>
+                                </li>
+                                <li>
+                                    <a href="<%=settings.TL2URL%>" target="_blank" class="text-decoration-none footer-link"><%=settings.TL2Label%></a>
+                                </li>
+                                <li>
+                                    <a href="<%=settings.TL3URL%>" target="_blank" class="text-decoration-none footer-link"><%=settings.TL3Label%></a>
+                                </li>
+                                <li>
+                                    <a href="<%=settings.TL4URL%>" target="_blank" class="text-decoration-none footer-link"><%=settings.TL4Label%></a>
+                                </li>
+                            </ul>
+                        </div>
+                        <% } else { %>
+                            <p>Please configure the Site Settings in the Teacher Portal.</p>
+                            <% } %>
+            </div>
+        </div>
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
+            <span class="text-light">&copy 2021 LibertyLaunchGroup</span>
+        </div>
+    </footer>
+    <script src="/scripts/popper.min.js"></script>
+    <script src="/scripts/bootstrap.min.js"></script>
+    <script src="/scripts/validateForms.js"></script>
+</body>
+
+</html>
