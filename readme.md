@@ -1,4 +1,4 @@
-This repository has a live demo available at https://demo-ejs-education.herokuapp.com/
+This repository has a live demo available at https://demo-ejs-education.herokuapp.com/. On the registration page there is an admin code in the placeholder.
 
 You must have MongoDB community edition installeda and have the mongod.exe task running. https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/
 
